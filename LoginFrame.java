@@ -35,6 +35,8 @@ public class LoginFrame
     
     private JFrame fr;
     
+    private Font defaultUIFont;
+    
     private JLabel loginTitle;
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -46,6 +48,8 @@ public class LoginFrame
         usernameField = new JTextField("email");
         passwordField = new JPasswordField("password");
         loginButton = new JButton("Sign in");
+        
+        defaultUIFont = new Font("Arial", Font.PLAIN, 14);
     }
     
     public void displayLoginWindow() {
@@ -56,9 +60,12 @@ public class LoginFrame
         JPanel mainPanel = new JPanel (new GridLayout(4, 1));
         
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
-        loginTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        loginTitle.setFont(new Font("Arial", Font.BOLD, 24));
+        loginTitle.setForeground(new Color(0, 149, 255));
         
-        usernameField.setFont(new Font("Arial", Font.PLAIN, 14));
+        usernameField.setFont(defaultUIFont);
+        passwordField.setFont(defaultUIFont);
+        loginButton.setFont(defaultUIFont);
         
         mainPanel.add(loginTitle);
         mainPanel.add(usernameField);
