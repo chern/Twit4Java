@@ -4,7 +4,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #606c71; }
@@ -13,7 +13,7 @@ a {
   color: #1e6bb8;
   text-decoration: none; }
   a:hover {
-    text-decoration: underline; }
+    text-decoration: none; }
 
 .btn {
   display: inline-block;
@@ -72,6 +72,7 @@ a {
     padding: 2rem 1rem; } }
 
 .project-name {
+  font-weight: 300;
   margin-top: 0;
   margin-bottom: 0.1rem; }
 
