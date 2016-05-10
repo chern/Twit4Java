@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 
@@ -31,6 +32,8 @@ public class ComposeTweetFrame
     private JTextField newTweetTextField;
     private JButton tweetButton;
     
+    private String tweetString;
+    
     public ComposeTweetFrame() {
         fr = new JFrame("Compose Tweet");
         newTweetTextField = new JTextField();
@@ -54,6 +57,14 @@ public class ComposeTweetFrame
         class TweetButtonListener implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
+                tweetString = newTweetTextField.getText();
+                
+                if ((tweetString==null) || (tweetString.length() > 140)) {
+                    // System.out.println("Tweet cannot exceed 140 characters!");
+                    
+                    JOptionPane characterLengthWarningPane = new JOptionPane();
+                    characterLengthWarningPane.showMessageDialog(null, "Tweet cannot exceed 140 characters!", "Tweet Length", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
         
