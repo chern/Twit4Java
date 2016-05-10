@@ -1,6 +1,6 @@
 {
   "name": "Twit4Java",
   "tagline": "A rudimentary Twitter client for Java",
-  "body": "### About\r\nTwit4Java is a basic Twitter client written in Java. We are making this for fun and as our final project for our Computer Programming class.\r\n\r\n### Authors\r\nTwit4Java is brought to you by @wchern and @nishand17.",
+  "body": "### About\r\nTwit4Java is a basic Twitter client written in Java. We are making this for fun and as our final project for our Computer Programming class.\r\n\r\n### Technologies\r\nTwit4Java uses the [Twitter4J library] (http://twitter4j.org/en/index.html).\r\n\r\n### Authors\r\nTwit4Java is brought to you by @wchern and @nishand17.",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
