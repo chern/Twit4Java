@@ -25,26 +25,24 @@ import java.awt.image.BufferedImage;
  */
 public class ComposeTweetFrame
 {
+    // instance fields
     private JFrame fr;
-    
     private Font defaultUIFont;
-    
     private JTextField newTweetTextField;
     private JButton tweetButton;
-    
     private String tweetString;
     
     public ComposeTweetFrame() {
+        // initialize instance fields
         fr = new JFrame("Compose Tweet");
         newTweetTextField = new JTextField();
         tweetButton = new JButton("Tweet");
-        
         defaultUIFont = new Font("Arial", Font.PLAIN, 14);
     }
     
     public void displayTweetWindow() {
-        fr.setSize(300, 120);
-        fr.setResizable(false);
+        fr.setSize(300, 120); // invoke setSize mutator method on JFrame object reference by fr, set window dimensions to 300 x 120 px
+        fr.setResizable(false); // do not allow resizing of window.
         
         JPanel mainPanel = new JPanel(new GridLayout(2, 1));
         
