@@ -9,11 +9,11 @@ import twitter4j.conf.Configuration;
 import twitter4j.media.ImageUpload;
 import twitter4j.media.ImageUploadFactory;
 import twitter4j.media.MediaProvider;
-
+import java.util.GregorianCalendar;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.Calendar;
 /**
  * Write a description of class AuthTest here.
  * 
@@ -39,8 +39,12 @@ public class AuthTest
         System.setProperty("twitter4j.http.useSSL", "false");
         AccessToken a = new AccessToken(accessToken, accessSecret);
         twitter.setOAuthAccessToken(a);
+        GregorianCalendar calendar = new GregorianCalendar();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
         try {
-            Status status = twitter.updateStatus("HI");
+            Status status = twitter.updateStatus("HI" + " " + hour + ":" + minute + ":" + second);
             System.out.println("Successfully updated the status to [" + status.getText() + "].");
         }
         catch(TwitterException te) {
