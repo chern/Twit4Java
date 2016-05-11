@@ -39,17 +39,17 @@ public class AuthTest
         System.setProperty("twitter4j.http.useSSL", "false");
         AccessToken a = new AccessToken(accessToken, accessSecret);
         twitter.setOAuthAccessToken(a);
+        
         GregorianCalendar calendar = new GregorianCalendar();
         int hour = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
         try {
-            Status status = twitter.updateStatus("HI" + " " + hour + ":" + minute + ":" + second);
+            Status status = twitter.updateStatus("" + " " + hour + ":" + minute + ":" + second);
             System.out.println("Successfully updated the status to [" + status.getText() + "].");
         }
         catch(TwitterException te) {
             System.out.println("FAIL!");
-            te.printStackTrace();
         }
     }
 }
