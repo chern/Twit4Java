@@ -1,5 +1,4 @@
 
-
 /**
  * 
  * @author William Chern
@@ -8,6 +7,7 @@
 public class TwitStarter 
 {
     public static void main (String[] args) {
-        
+        MainFrame m = new MainFrame();
+        m.displayInterface();
     }
 }
