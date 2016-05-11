@@ -27,6 +27,7 @@ public class ComposeTweetFrame
 {
     // instance fields
     private JFrame fr;
+    private JPanel jp;
     private Font defaultUIFont;
     private JTextField newTweetTextField;
     private JButton tweetButton;
