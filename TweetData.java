@@ -22,7 +22,7 @@ public class TweetData
         favoriteCount = f;
     }
     
-    public String getUser() {
+    public String getUserHandle() {
         return userHandle;
     }
     

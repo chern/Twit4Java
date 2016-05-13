@@ -2,7 +2,7 @@
 comment0.params=u\ t\ i\ r\ f
 comment0.target=TweetData(java.lang.String,\ java.lang.String,\ javax.swing.ImageIcon,\ int,\ int)
 comment1.params=
-comment1.target=java.lang.String\ getUser()
+comment1.target=java.lang.String\ getUserHandle()
 comment2.params=
 comment2.target=java.lang.String\ getTweetText()
 comment3.params=

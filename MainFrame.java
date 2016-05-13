@@ -119,6 +119,7 @@ public class MainFrame
         leftPanel.add(tweetButton);
 
         JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2));
+        currentUserHandle.setFont(defaultUIFont);
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
 
@@ -170,9 +171,13 @@ public class MainFrame
                 try{
                     picURL = new URL(strUrl);
                     profileImg = new ImageIcon(picURL);
-                    tweetDataList.add(new TweetData(statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
+                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
                 } catch(MalformedURLException te) {
                 }
+            }
+            
+            for (int i=0; i<5; i++) {
+                displayTweet(tweetDataList.get(i), centerPanel);
             }
         } 
         catch (TwitterException te) {
@@ -185,4 +190,28 @@ public class MainFrame
     private void addRightPanel(JPanel overallP) {
         JPanel rightPanel = new JPanel();
     }
+    
+    private void displayTweet(TweetData t, JPanel p) {
+        JPanel tweetPanel = new JPanel(new GridLayout(1, 2));
+        JPanel tweetTextPanel = new JPanel(new GridLayout(2, 1));
+        
+        JLabel userIconImage = new JLabel();
+        ImageIcon uImageIcon = t.getUserIcon();
+        userIconImage.setIcon(uImageIcon);
+        
+        JLabel userHandleLabel = new JLabel(t.getUserHandle());
+        userHandleLabel.setFont(defaultUIFont);
+        JLabel tweetTextLabel = new JLabel(t.getTweetText());
+        tweetTextLabel.setFont(defaultUIFont);
+        
+        tweetTextPanel.add(userHandleLabel);
+        tweetTextPanel.add(tweetTextLabel);
+        
+        tweetPanel.add(userIconImage);
+        tweetPanel.add(tweetTextPanel);
+        
+        
+        p.add(tweetPanel);
+    }
+    
 }
