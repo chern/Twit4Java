@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=u\ t
-comment0.target=Tweet(java.lang.String,\ java.lang.String)
-comment1.params=
-comment1.target=java.lang.String\ getUser()
-comment2.params=
-comment2.target=java.lang.String\ getTweetText()
-numComments=3

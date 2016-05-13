@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=u\ t\ i\ r\ f
+comment0.target=TweetData(java.lang.String,\ java.lang.String,\ javax.swing.ImageIcon,\ int,\ int)
+comment1.params=
+comment1.target=java.lang.String\ getUser()
+comment2.params=
+comment2.target=java.lang.String\ getTweetText()
+comment3.params=
+comment3.target=javax.swing.ImageIcon\ getUserIcon()
+comment4.params=
+comment4.target=int\ getRetweetCount()
+comment5.params=
+comment5.target=int\ getFavoriteCount()
+numComments=6

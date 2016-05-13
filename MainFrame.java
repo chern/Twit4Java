@@ -9,6 +9,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.ResponseList;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -29,6 +31,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 /**
@@ -52,6 +55,7 @@ public class MainFrame
     private Twitter twitter;
     private User user;
     private URL url;
+
     public MainFrame() {
         fr = new JFrame("Twit4Java");
         String consumerKey = "LqFDdgq7SurJdoQeAtBiDmC8p";
@@ -72,30 +76,30 @@ public class MainFrame
         newTweetString = "";
 
         currentUserAccountImage = new JLabel();
-        try{
+        try {
             user = twitter.showUser(twitter.getId());
         }
-        catch(TwitterException te) {}
+        catch (TwitterException te) {}
 
         String u = user.getProfileImageURL();
-        try{
+        try {
             url = new URL(u);
         }
-        catch(MalformedURLException mu){}
+        catch (MalformedURLException mu){}
 
         ImageIcon img = new ImageIcon(url);
         currentUserAccountImage.setIcon(img);
         newTweetTextField = new JTextField();
         currentUserHandle = new JLabel("@Twit4Java");
         tweetButton = new JButton("Tweet");
-
     }
+
     public void displayInterface() {
         fr.setSize(1100, 500);
-        fr.setResizable(false);
+        // fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel overallPanel = new JPanel(new BorderLayout(3, 3));
+        JPanel overallPanel = new JPanel(new BorderLayout());
 
         addLeftPanel(overallPanel);
         addCenterPanel(overallPanel);
@@ -106,7 +110,7 @@ public class MainFrame
     }
 
     private void addLeftPanel(JPanel overallP) {
-        JPanel leftPanel = new JPanel(new GridLayout(3, 1));
+        JPanel leftPanel = new JPanel(new GridLayout(8, 1));
 
         newTweetTextField.setFont(defaultUIFont);
         tweetButton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -125,34 +129,51 @@ public class MainFrame
             public void actionPerformed(ActionEvent e) {
                 newTweetString = newTweetTextField.getText();
 
-                if ((newTweetString==null) || (newTweetString.length() > 140)) {
+                if ((newTweetString==null) || (newTweetString.length() > 131)) {
                     // System.out.println("Tweet cannot exceed 140 characters!");
 
                     JOptionPane characterLengthWarningPane = new JOptionPane();
                     characterLengthWarningPane.showMessageDialog(null, "Tweet cannot exceed 140 characters!", "Tweet Length", JOptionPane.WARNING_MESSAGE);
                 }
-                else{
+                else {
                     GregorianCalendar calendar = new GregorianCalendar();
                     int hour = calendar.get(Calendar.HOUR);
                     int minute = calendar.get(Calendar.MINUTE);
                     int second = calendar.get(Calendar.SECOND);
-                    try{
+                    try {
                         Status status = twitter.updateStatus(newTweetString + " " + hour + ":" + minute + ":" + second);
+                        newTweetTextField.setText("");
                     }
-                    catch(TwitterException te) {}
+                    catch (TwitterException te) {}
                 }
             }
         }
 
         tweetButton.addActionListener(new TweetButtonListener());
 
-        overallP.add(leftPanel);
+        overallP.add(leftPanel, BorderLayout.WEST);
     }
 
     private void addCenterPanel(JPanel overallP) {
         JPanel centerPanel = new JPanel(new GridLayout(5, 1));
+        ResponseList<Status> statusList;
+        ArrayList<TweetData> tweetDataList = new ArrayList<TweetData>();
+        try {
+            statusList = twitter.getHomeTimeline();
+            // System.out.println("@" + statusList.get(0).getUser().getScreenName() + " — " + statusList.get(0).getText());
+            
+            for (int i=0; i<5; i++) {
+                tweetDataList.add(new TweetData(statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), null, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
+            }
+        } 
+        catch (TwitterException te) {
+            System.out.println("COULD NOT GET TIMELINE STATUS");
+        }
+        
+        overallP.add(centerPanel, BorderLayout.CENTER);
     }
 
     private void addRightPanel(JPanel overallP) {
+        JPanel rightPanel = new JPanel();
     }
 }
