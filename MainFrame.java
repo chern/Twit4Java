@@ -163,7 +163,16 @@ public class MainFrame
             // System.out.println("@" + statusList.get(0).getUser().getScreenName() + " — " + statusList.get(0).getText());
             
             for (int i=0; i<5; i++) {
-                tweetDataList.add(new TweetData(statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), null, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
+                User u = statusList.get(i).getUser();
+                String strUrl = u.getProfileImageURL();
+                URL picURL;
+                ImageIcon profileImg;
+                try{
+                    picURL = new URL(strUrl);
+                    profileImg = new ImageIcon(picURL);
+                    tweetDataList.add(new TweetData(statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
+                } catch(MalformedURLException te) {
+                }
             }
         } 
         catch (TwitterException te) {
