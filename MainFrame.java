@@ -43,6 +43,7 @@ import java.util.Calendar;
 public class MainFrame
 {
     public final Font defaultUIFont = new Font("Arial", Font.PLAIN, 14);
+    public final Font defaultUIFontBold = new Font("Arial", Font.BOLD, 15);
 
     private JFrame fr;
 
@@ -119,7 +120,7 @@ public class MainFrame
         leftPanel.add(tweetButton);
 
         JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2));
-        currentUserHandle.setFont(defaultUIFont);
+        currentUserHandle.setFont(defaultUIFontBold);
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
 
@@ -200,7 +201,7 @@ public class MainFrame
         userIconImage.setIcon(uImageIcon);
         
         JLabel userHandleLabel = new JLabel(t.getUserHandle());
-        userHandleLabel.setFont(defaultUIFont);
+        userHandleLabel.setFont(defaultUIFontBold);
         JLabel tweetTextLabel = new JLabel(t.getTweetText());
         tweetTextLabel.setFont(defaultUIFont);
         
