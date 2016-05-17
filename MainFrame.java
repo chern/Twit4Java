@@ -34,6 +34,9 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.FlowLayout;
 /**
  * MainPanel
  * 
@@ -56,8 +59,11 @@ public class MainFrame
     private Twitter twitter;
     private User user;
     private URL url;
-
+    ImageIcon favoritePic;
+    ImageIcon retweet;
     public MainFrame() {
+        favoritePic = createImageIcon("heart_button_default.png");
+        retweet = createImageIcon("retweet_button_default.png");
         fr = new JFrame("Twit4Java");
         String consumerKey = "LqFDdgq7SurJdoQeAtBiDmC8p";
         String consumerSecret = "GDdnMzYJyLddVFgdeXET9I0sHzQFYMGgozIrcTiJzDcTSflogo";
@@ -97,7 +103,7 @@ public class MainFrame
 
     public void displayInterface() {
         fr.setSize(1100, 500);
-        // fr.setResizable(false);
+        fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel overallPanel = new JPanel(new BorderLayout());
@@ -163,7 +169,7 @@ public class MainFrame
         try {
             statusList = twitter.getHomeTimeline();
             // System.out.println("@" + statusList.get(0).getUser().getScreenName() + " — " + statusList.get(0).getText());
-            
+
             for (int i=0; i<5; i++) {
                 User u = statusList.get(i).getUser();
                 String strUrl = u.getProfileImageURL();
@@ -176,7 +182,7 @@ public class MainFrame
                 } catch(MalformedURLException te) {
                 }
             }
-            
+
             for (int i=0; i<5; i++) {
                 displayTweet(tweetDataList.get(i), centerPanel);
             }
@@ -184,41 +190,65 @@ public class MainFrame
         catch (TwitterException te) {
             System.out.println("COULD NOT GET TIMELINE STATUS");
         }
-        
         overallP.add(centerPanel, BorderLayout.CENTER);
     }
 
     private void addRightPanel(JPanel overallP) {
         JPanel rightPanel = new JPanel();
     }
-    
+
     private void displayTweet(TweetData t, JPanel p) {
-        JPanel tweetPanel = new JPanel(new GridLayout(1, 2));
-        JPanel tweetTextPanel = new JPanel(new GridLayout(2, 1));
-        
+        JPanel tweetPanel = new JPanel(new GridBagLayout());
+        JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1));
+        GridBagConstraints gbc = new GridBagConstraints();
         JLabel userIconImage = new JLabel();
         ImageIcon uImageIcon = t.getUserIcon();
         userIconImage.setIcon(uImageIcon);
-        
+
         JLabel userHandleLabel = new JLabel(t.getUserHandle());
         userHandleLabel.setFont(defaultUIFontBold);
+        /*
+        int spaces2add = 140 - (t.getTweetText().length());
+        String tweetText = t.getTweetText();
+        for(int i = 0; i < spaces2add; i++) {
+            tweetText = tweetText + " ";
+        }
+        */
         JLabel tweetTextLabel = new JLabel(t.getTweetText());
         tweetTextLabel.setFont(defaultUIFont);
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
+
+        JLabel favoriteLabel = new JLabel();
+        favoriteLabel.setIcon(favoritePic);
+        JLabel retweetLabel = new JLabel();
+        retweetLabel.setIcon(retweet);
+        JPanel actionPanel = new JPanel(new GridLayout(1,2));
+        actionPanel.add(favoriteLabel);
+        actionPanel.add(retweetLabel);
+        tweetTextPanel.add(actionPanel);
         
-        tweetPanel.add(userIconImage);
-        tweetPanel.add(tweetTextPanel);
-        /*for(int i = 0; i < 5; i++) {
-            JPanel trash = new JPanel();
-            trash.setPreferredSize(new Dimension(10,10));
-            tweetPanel.add(trash);
-        }*/
         
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        tweetPanel.add(userIconImage, gbc);
         
-        
-        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 4;
+        tweetPanel.add(tweetTextPanel, gbc);
         p.add(tweetPanel);
     }
-    
+
+    public ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
 }

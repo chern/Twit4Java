@@ -11,4 +11,6 @@ comment4.params=overallP
 comment4.target=void\ addRightPanel(javax.swing.JPanel)
 comment5.params=t\ p
 comment5.target=void\ displayTweet(TweetData,\ javax.swing.JPanel)
-numComments=6
+comment6.params=path
+comment6.target=javax.swing.ImageIcon\ createImageIcon(java.lang.String)
+numComments=7
