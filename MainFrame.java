@@ -204,12 +204,18 @@ public class MainFrame
         userHandleLabel.setFont(defaultUIFontBold);
         JLabel tweetTextLabel = new JLabel(t.getTweetText());
         tweetTextLabel.setFont(defaultUIFont);
-        
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
         
         tweetPanel.add(userIconImage);
         tweetPanel.add(tweetTextPanel);
+        /*for(int i = 0; i < 5; i++) {
+            JPanel trash = new JPanel();
+            trash.setPreferredSize(new Dimension(10,10));
+            tweetPanel.add(trash);
+        }*/
+        
+        
         
         
         p.add(tweetPanel);
