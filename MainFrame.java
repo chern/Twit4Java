@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -18,6 +19,7 @@ import twitter4j.media.ImageUpload;
 import twitter4j.media.ImageUploadFactory;
 import twitter4j.media.MediaProvider;
 import twitter4j.User;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,8 +31,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+
 import java.net.URL;
 import java.net.MalformedURLException;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
@@ -56,11 +60,20 @@ public class MainFrame
 
     private JLabel currentUserHandle;
     private JLabel currentUserAccountImage;
+    
     private Twitter twitter;
     private User user;
     private URL url;
-    ImageIcon favoritePic;
-    ImageIcon retweet;
+    
+    private ImageIcon favoritePic;
+    private ImageIcon retweet;
+    
+    private JLabel profileViewUserAccountImage;
+    private JLabel profileViewUserHandle;
+    private JLabel profileViewNumTweetsLabel;
+    private JLabel profileViewNumFollowersLabel;
+    private JLabel profileViewNumFollowingLabel;
+    
     public MainFrame() {
         favoritePic = createImageIcon("heart_button_default.png");
         retweet = createImageIcon("retweet_button_default.png");
@@ -99,10 +112,16 @@ public class MainFrame
         newTweetTextField = new JTextField();
         currentUserHandle = new JLabel("@Twit4Java");
         tweetButton = new JButton("Tweet");
+        
+        profileViewUserAccountImage = new JLabel();
+        profileViewUserHandle = new JLabel("@user");
+        profileViewNumTweetsLabel = new JLabel("[X] tweets");
+        profileViewNumFollowersLabel = new JLabel("[X] followers");
+        profileViewNumFollowingLabel = new JLabel("[X] following");
     }
 
     public void displayInterface() {
-        fr.setSize(1100, 500);
+        fr.setSize(1200, 650);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -194,7 +213,15 @@ public class MainFrame
     }
 
     private void addRightPanel(JPanel overallP) {
-        JPanel rightPanel = new JPanel();
+        JPanel rightPanel = new JPanel(new GridLayout(8, 1));
+        
+        rightPanel.add(profileViewUserAccountImage);
+        rightPanel.add(profileViewUserHandle);
+        rightPanel.add(profileViewNumTweetsLabel);
+        rightPanel.add(profileViewNumFollowersLabel);
+        rightPanel.add(profileViewNumFollowingLabel);
+        
+        overallP.add(rightPanel, BorderLayout.EAST);
     }
 
     private void displayTweet(TweetData t, JPanel p) {
