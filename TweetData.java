@@ -14,12 +14,19 @@ public class TweetData
     private int retweetCount;
     private int favoriteCount;
     
-    public TweetData(String u, String t, ImageIcon i, int r, int f) {
+    private int numTweetsCount;
+    private int followersCount;
+    private int followingCount;
+    
+    public TweetData(String u, String t, ImageIcon i, int r, int f, int numTweets, int followers, int following) {
         userHandle = u;
         tweetText = t;
         userIcon = i;
         retweetCount = r;
         favoriteCount = f;
+        numTweetsCount = numTweets;
+        followersCount = followers;
+        followingCount = following;
     }
     
     public String getUserHandle() {

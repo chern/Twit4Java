@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=u\ t\ i\ r\ f
-comment0.target=TweetData(java.lang.String,\ java.lang.String,\ javax.swing.ImageIcon,\ int,\ int)
+comment0.params=u\ t\ i\ r\ f\ numTweets\ followers\ following
+comment0.target=TweetData(java.lang.String,\ java.lang.String,\ javax.swing.ImageIcon,\ int,\ int,\ int,\ int,\ int)
 comment1.params=
 comment1.target=java.lang.String\ getUserHandle()
 comment2.params=
