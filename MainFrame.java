@@ -46,7 +46,7 @@ import java.awt.FlowLayout;
 /**
  * MainPanel
  * 
- * @author William Chern
+ * @author William Chern & Nishan D'Souza
  * @version 1.0
  */
 public class MainFrame
@@ -247,11 +247,42 @@ public class MainFrame
         tweetTextLabel.setFont(defaultUIFont);
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
+        
+        class RetweetListener implements MouseListener {
+            public void mouseClicked (MouseEvent e) {
+            }
+            public void mouseEntered (MouseEvent e) {
+            }
+            public void mouseExited (MouseEvent e) {
+            }
+            public void mousePressed (MouseEvent e) {
+                // retweet logic
+            }
+            public void mouseReleased (MouseEvent e) {
+            }
+        }
+        
+        class FavoriteListener implements MouseListener {
+            public void mouseClicked (MouseEvent e) {
+            }
+            public void mouseEntered (MouseEvent e) {
+            }
+            public void mouseExited (MouseEvent e) {
+            }
+            public void mousePressed (MouseEvent e) {
+                // favorite logic
+            }
+            public void mouseReleased (MouseEvent e) {
+            }
+        }
+        
 
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
+        favoriteLabel.addMouseListener(new FavoriteListener());
         JLabel retweetLabel = new JLabel();
         retweetLabel.setIcon(retweet);
+        retweetLabel.addMouseListener(new RetweetListener());
         JPanel actionPanel = new JPanel(new GridLayout(1,2));
         actionPanel.add(favoriteLabel);
         actionPanel.add(retweetLabel);
@@ -278,7 +309,6 @@ public class MainFrame
             public void mouseExited (MouseEvent e) {
             }
             public void mousePressed (MouseEvent e) {
-                // implement profileViewUserAccountImage here
                 profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
                 
@@ -289,6 +319,8 @@ public class MainFrame
             public void mouseReleased (MouseEvent e) {
             }
         }
+        
+        userHandleLabel.addMouseListener(new UserLabelListener());
     }
 
     public ImageIcon createImageIcon(String path) {
