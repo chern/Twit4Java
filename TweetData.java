@@ -49,5 +49,15 @@ public class TweetData
         return favoriteCount;
     }
     
+    public int getUserNumTweets() {
+        return numTweetsCount;
+    }
     
+    public int getUserFollowers() {
+        return followersCount;
+    }
+    
+    public int getUserFollowing() {
+        return followingCount;
+    }
 }
