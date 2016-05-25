@@ -199,7 +199,7 @@ public class MainFrame
                 try{
                     picURL = new URL(strUrl);
                     profileImg = new ImageIcon(picURL);
-                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount, statusList.get(i).getUser().getFriendsCount()));
+                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount(), statusList.get(i).getUser().getFriendsCount()));
                 } catch(MalformedURLException te) {
                 }
             }
@@ -279,9 +279,12 @@ public class MainFrame
             }
             public void mousePressed (MouseEvent e) {
                 // implement profileViewUserAccountImage here
+                profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
                 
-                // profileViewNumTweetsLabel.setText()
+                profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");
+                profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
+                profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
             }
             public void mouseReleased (MouseEvent e) {
             }
