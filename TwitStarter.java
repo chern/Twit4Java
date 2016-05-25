@@ -1,4 +1,7 @@
-
+/*
+ * username - nishand@gmail.com or Twit4Java (email preferred)
+ * password - nishanandchern (yeah i know, very unique)
+ */
 /**
  * 
  * @author William Chern

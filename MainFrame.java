@@ -1,3 +1,7 @@
+/*
+ * username - nishand@gmail.com or Twit4Java (email preferred)
+ * password - nishanandchern (yeah i know, very unique)
+ */
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -43,6 +47,10 @@ import java.util.Calendar;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
+/*
+ * username - nishand@gmail.com or Twit4Java (email preferred)
+ * password - nishanandchern (yeah i know, very unique)
+ */
 /**
  * MainPanel
  * 
