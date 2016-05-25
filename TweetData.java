@@ -17,8 +17,8 @@ public class TweetData
     private int numTweetsCount;
     private int followersCount;
     private int followingCount;
-    
-    public TweetData(String u, String t, ImageIcon i, int r, int f, int numTweets, int followers, int following) {
+    private long tweetID;
+    public TweetData(String u, String t, ImageIcon i, int r, int f, int numTweets, int followers, int following, long id) {
         userHandle = u;
         tweetText = t;
         userIcon = i;
@@ -27,6 +27,7 @@ public class TweetData
         numTweetsCount = numTweets;
         followersCount = followers;
         followingCount = following;
+        tweetID = id;
     }
     
     public String getUserHandle() {
@@ -59,5 +60,8 @@ public class TweetData
     
     public int getUserFollowing() {
         return followingCount;
+    }
+    public long getID() {
+        return tweetID;
     }
 }

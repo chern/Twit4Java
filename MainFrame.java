@@ -62,20 +62,20 @@ public class MainFrame
 
     private JLabel currentUserHandle;
     private JLabel currentUserAccountImage;
-    
+
     private Twitter twitter;
     private User user;
     private URL url;
-    
+
     private ImageIcon favoritePic;
     private ImageIcon retweet;
-    
+
     private JLabel profileViewUserAccountImage;
     private JLabel profileViewUserHandle;
     private JLabel profileViewNumTweetsLabel;
     private JLabel profileViewNumFollowersLabel;
     private JLabel profileViewNumFollowingLabel;
-    
+
     public MainFrame() {
         favoritePic = createImageIcon("heart_button_default.png");
         retweet = createImageIcon("retweet_button_default.png");
@@ -114,7 +114,7 @@ public class MainFrame
         newTweetTextField = new JTextField();
         currentUserHandle = new JLabel("@Twit4Java");
         tweetButton = new JButton("Tweet");
-        
+
         profileViewUserAccountImage = new JLabel();
         profileViewUserHandle = new JLabel("@user");
         profileViewNumTweetsLabel = new JLabel("[X] tweets");
@@ -199,7 +199,8 @@ public class MainFrame
                 try{
                     picURL = new URL(strUrl);
                     profileImg = new ImageIcon(picURL);
-                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount(), statusList.get(i).getUser().getFriendsCount()));
+                    long tweetID = statusList.get(i).getId();
+                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount(), statusList.get(i).getUser().getFriendsCount(), tweetID));
                 } catch(MalformedURLException te) {
                 }
             }
@@ -216,13 +217,13 @@ public class MainFrame
 
     private void addRightPanel(JPanel overallP) {
         JPanel rightPanel = new JPanel(new GridLayout(8, 1));
-        
+
         rightPanel.add(profileViewUserAccountImage);
         rightPanel.add(profileViewUserHandle);
         rightPanel.add(profileViewNumTweetsLabel);
         rightPanel.add(profileViewNumFollowersLabel);
         rightPanel.add(profileViewNumFollowingLabel);
-        
+
         overallP.add(rightPanel, BorderLayout.EAST);
     }
 
@@ -236,46 +237,63 @@ public class MainFrame
 
         JLabel userHandleLabel = new JLabel(t.getUserHandle());
         userHandleLabel.setFont(defaultUIFontBold);
-        /*
-        int spaces2add = 140 - (t.getTweetText().length());
+
+        int spaces2add = 110 - (t.getTweetText().length());
         String tweetText = t.getTweetText();
-        for(int i = 0; i < spaces2add; i++) {
-            tweetText = tweetText + " ";
+        if(spaces2add>30) {
+            for(int i = 0; i < spaces2add; i++) {
+                tweetText = tweetText + " ";
+            }
         }
-        */
-        JLabel tweetTextLabel = new JLabel(t.getTweetText());
+
+        JLabel tweetTextLabel = new JLabel(tweetText);
         tweetTextLabel.setFont(defaultUIFont);
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
-        
+
         class RetweetListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
+
             public void mouseEntered (MouseEvent e) {
             }
+
             public void mouseExited (MouseEvent e) {
             }
+
             public void mousePressed (MouseEvent e) {
                 // retweet logic
+                try {
+                twitter.retweetStatus(t.getID());
+                System.out.println("Successfully rt'd");
+            } catch(TwitterException te) {}
             }
+
             public void mouseReleased (MouseEvent e) {
             }
         }
-        
+
         class FavoriteListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
+
             public void mouseEntered (MouseEvent e) {
             }
+
             public void mouseExited (MouseEvent e) {
             }
+
             public void mousePressed (MouseEvent e) {
                 // favorite logic
+                try {
+                    Status rT = twitter.createFavorite(t.getID());
+                    System.out.println("Successfully fav'd");
+                } catch(TwitterException te) {}
             }
+
             public void mouseReleased (MouseEvent e) {
             }
         }
-        
 
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
@@ -287,39 +305,42 @@ public class MainFrame
         actionPanel.add(favoriteLabel);
         actionPanel.add(retweetLabel);
         tweetTextPanel.add(actionPanel);
-        
-        
+
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
         tweetPanel.add(userIconImage, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 4;
         tweetPanel.add(tweetTextPanel, gbc);
         p.add(tweetPanel);
-        
+
         class UserLabelListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
+
             public void mouseEntered (MouseEvent e) {
             }
+
             public void mouseExited (MouseEvent e) {
             }
+
             public void mousePressed (MouseEvent e) {
                 profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
-                
+
                 profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");
                 profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
                 profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
             }
+
             public void mouseReleased (MouseEvent e) {
             }
         }
-        
+
         userHandleLabel.addMouseListener(new UserLabelListener());
     }
 
