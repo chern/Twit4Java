@@ -30,6 +30,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import java.net.URL;
@@ -197,7 +199,7 @@ public class MainFrame
                 try{
                     picURL = new URL(strUrl);
                     profileImg = new ImageIcon(picURL);
-                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount()));
+                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount, statusList.get(i).getUser().getFriendsCount()));
                 } catch(MalformedURLException te) {
                 }
             }
@@ -267,10 +269,27 @@ public class MainFrame
         gbc.gridwidth = 4;
         tweetPanel.add(tweetTextPanel, gbc);
         p.add(tweetPanel);
+        
+        class UserLabelListener implements MouseListener {
+            public void mouseClicked (MouseEvent e) {
+            }
+            public void mouseEntered (MouseEvent e) {
+            }
+            public void mouseExited (MouseEvent e) {
+            }
+            public void mousePressed (MouseEvent e) {
+                // implement profileViewUserAccountImage here
+                profileViewUserHandle.setText(t.getUserHandle());
+                
+                // profileViewNumTweetsLabel.setText()
+            }
+            public void mouseReleased (MouseEvent e) {
+            }
+        }
     }
 
     public ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = getClass().getResource(path);
+        URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
