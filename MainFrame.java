@@ -1,7 +1,3 @@
-/*
- * username - nishand@gmail.com or Twit4Java (email preferred)
- * password - nishanandchern (yeah i know, very unique)
- */
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -9,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -131,7 +129,7 @@ public class MainFrame
     }
 
     public void displayInterface() {
-        fr.setSize(1200, 650);
+        fr.setSize(1250, 650);
         fr.setResizable(false);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -187,7 +185,7 @@ public class MainFrame
         }
 
         tweetButton.addActionListener(new TweetButtonListener());
-
+        leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
         overallP.add(leftPanel, BorderLayout.WEST);
     }
 
@@ -226,11 +224,18 @@ public class MainFrame
     private void addRightPanel(JPanel overallP) {
         JPanel rightPanel = new JPanel(new GridLayout(8, 1));
 
+        profileViewUserHandle.setFont(defaultUIFontBold);
+        profileViewNumTweetsLabel.setFont(defaultUIFont);
+        profileViewNumFollowersLabel.setFont(defaultUIFont);
+        profileViewNumFollowingLabel.setFont(defaultUIFont);
+        
         rightPanel.add(profileViewUserAccountImage);
         rightPanel.add(profileViewUserHandle);
         rightPanel.add(profileViewNumTweetsLabel);
         rightPanel.add(profileViewNumFollowersLabel);
         rightPanel.add(profileViewNumFollowingLabel);
+        
+        rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
 
         overallP.add(rightPanel, BorderLayout.EAST);
     }
@@ -239,6 +244,7 @@ public class MainFrame
         JPanel tweetPanel = new JPanel(new GridBagLayout());
         JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1));
         GridBagConstraints gbc = new GridBagConstraints();
+        
         JLabel userIconImage = new JLabel();
         ImageIcon uImageIcon = t.getUserIcon();
         userIconImage.setIcon(uImageIcon);
@@ -349,7 +355,9 @@ public class MainFrame
             }
         }
 
-        userHandleLabel.addMouseListener(new UserLabelListener());
+        UserLabelListener uLL = new UserLabelListener();
+        userHandleLabel.addMouseListener(uLL);
+        userIconImage.addMouseListener(uLL);
     }
 
     public ImageIcon createImageIcon(String path) {
