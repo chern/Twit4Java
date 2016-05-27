@@ -91,39 +91,39 @@ public class MainFrame
         fr = new JFrame("Twit4Java"); // initialize JFrame object reference
 
         // OAuth authentication
-        String consumerKey = "LqFDdgq7SurJdoQeAtBiDmC8p";
+        String consumerKey = "LqFDdgq7SurJdoQeAtBiDmC8p";//saving various consumer and access keys, secrets, and tokens for Oauth
         String consumerSecret = "GDdnMzYJyLddVFgdeXET9I0sHzQFYMGgozIrcTiJzDcTSflogo";
         String accessToken = "729714377562030082-FtbarB7pQ6BbMK8589vPpoiVgFBMV0i";
         String accessSecret = "o1GgPnihASydGh7jgMQEFncw7DQp0hGfHC9BcvpXL4A0a";
-        ConfigurationBuilder cb = new ConfigurationBuilder();
+        ConfigurationBuilder cb = new ConfigurationBuilder();//constructs a configuration builder, a class which is used to configure the twitter api
         cb.setDebugEnabled(true);
         cb.setOAuthConsumerKey(consumerKey);
         cb.setOAuthConsumerSecret(consumerSecret);
         cb.setOAuthAccessToken(accessToken);
-        cb.setOAuthAccessTokenSecret(accessSecret);
-        TwitterFactory tf = new TwitterFactory(cb.build());
-        twitter = tf.getInstance();
-        System.setProperty("twitter4j.http.useSSL", "false");
-        AccessToken a = new AccessToken(accessToken, accessSecret);
-        twitter.setOAuthAccessToken(a);
+        cb.setOAuthAccessTokenSecret(accessSecret);//invokes setter methods on the ConfigurationBuilder to allow it to configure a twitter object
+        TwitterFactory tf = new TwitterFactory(cb.build());//constructs a new TwitterFactory with a parameter of the return of the invoked method, .build()
+        twitter = tf.getInstance();//invokes the getInstance on the TwitterFactory and sets the return to a new Twitter object referenced by twitter
+        System.setProperty("twitter4j.http.useSSL", "false");//THIS THING TOOK SO LONG HARDEST PART HANDS DOWN. So apparently twitter doesn't support ssl and instead wants https
+        AccessToken a = new AccessToken(accessToken, accessSecret);//I therefore needed to invoke the setProperty on the System itself to change the useSLL property to false
+        twitter.setOAuthAccessToken(a);//Creates a new AccessToken object which contains the token and secret, and invokes the setOAuthAccessToken method to allow our twitter object to do commands
 
         newTweetString = "";
 
         currentUserAccountImage = new JLabel();
         try {
-            user = twitter.showUser(twitter.getId());
+            user = twitter.showUser(twitter.getId());//gets the current user
         }
         catch (TwitterException te) {}
 
         String u = user.getProfileImageURL();
         try {
-            url = new URL(u);
+            url = new URL(u);//gets the url for the user's profile pic
         }
         catch (MalformedURLException mu){}
 
         overallPanel = new JPanel(new BorderLayout());
 
-        currentUserAccountImage.setIcon(new ImageIcon(url));
+        currentUserAccountImage.setIcon(new ImageIcon(url));//invokes setIcon with new image icon from the url
         newTweetTextField = new JTextField();
         currentUserHandle = new JLabel("@Twit4Java");
         tweetButton = new JButton("Tweet");
@@ -257,7 +257,7 @@ public class MainFrame
     private void displayTweet(TweetData t, JPanel p) {
         JPanel tweetPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel to hold components for tweet and its data
         JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1)); // declare and initialize new JPanel specifically to hold text and username of Tweet
-        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();//in order to lay the tweets correctly, we use GridBagLayout to fix spacing between text and images
 
         JLabel userIconImage = new JLabel(); // declare and initialize new JLabel to hold account avatar of user
         ImageIcon uImageIcon = t.getUserIcon();
@@ -340,16 +340,16 @@ public class MainFrame
         actionPanel.add(retweetLabel);
         tweetTextPanel.add(actionPanel);
 
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.WEST;//using GridBagContraints values, anchors the text and images in the Layout
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
+        gbc.gridx = 0;//sets the x and y of the grid to 0,0 the upper left corner
         gbc.gridy = 0;
-        tweetPanel.add(userIconImage, gbc);
+        tweetPanel.add(userIconImage, gbc);//adds profile pic to the position in the gridbag layout
 
-        gbc.gridx = 1;
+        gbc.gridx = 1;//sets the x and y to 1,0 in the upper right corner
         gbc.gridy = 0;
-        gbc.gridwidth = 4;
-        tweetPanel.add(tweetTextPanel, gbc);
+        gbc.gridwidth = 4;//sets the width of this to 4, 4 times that of the picture
+        tweetPanel.add(tweetTextPanel, gbc);//adds the text for the tweet in the upper right in the gridbaglayout
         p.add(tweetPanel);
 
         class UserLabelListener implements MouseListener {
@@ -369,7 +369,7 @@ public class MainFrame
                 profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
 
-                profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");
+                profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");//uses various accessor methods of tweetData to set the text of the labels to those values
                 profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
                 profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
             }
@@ -385,9 +385,9 @@ public class MainFrame
     }
 
     public ImageIcon createImageIcon (String path) {
-        URL imgURL = getClass().getResource(path);
+        URL imgURL = getClass().getResource(path);//constructs a url using the path parameter variable
         if (imgURL != null) {
-            return new ImageIcon(imgURL);
+            return new ImageIcon(imgURL);//if the image is not null, a newly contructed ImageIcon with the url as the parameter is returned
         } else {
             System.err.println("Could not find file: " + path);
             return null;
