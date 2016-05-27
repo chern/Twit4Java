@@ -57,10 +57,12 @@ import java.awt.FlowLayout;
  */
 public class MainFrame
 {
-    public final Font defaultUIFont = new Font("Arial", Font.PLAIN, 14);
-    public final Font defaultUIFontBold = new Font("Arial", Font.BOLD, 15);
+    private final Font defaultUIFont = new Font("Arial", Font.PLAIN, 14); // the default UI font (Arial) for Twit4Java
+    private final Font defaultUIFontBold = new Font("Arial", Font.BOLD, 15); // the default BOLD style UI font
 
+    // instance field variables
     private JFrame fr;
+    private JPanel overallPanel;
 
     private String newTweetString;
     private JButton tweetButton;
@@ -82,10 +84,13 @@ public class MainFrame
     private JLabel profileViewNumFollowersLabel;
     private JLabel profileViewNumFollowingLabel;
 
-    public MainFrame() {
-        favoritePic = createImageIcon("heart_button_default.png");
+    public MainFrame () {
+        // initialization of instance field variables
+        favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
         retweet = createImageIcon("retweet_button_default.png");
-        fr = new JFrame("Twit4Java");
+        fr = new JFrame("Twit4Java"); // initialize JFrame object reference
+
+        // OAuth authentication
         String consumerKey = "LqFDdgq7SurJdoQeAtBiDmC8p";
         String consumerSecret = "GDdnMzYJyLddVFgdeXET9I0sHzQFYMGgozIrcTiJzDcTSflogo";
         String accessToken = "729714377562030082-FtbarB7pQ6BbMK8589vPpoiVgFBMV0i";
@@ -101,6 +106,7 @@ public class MainFrame
         System.setProperty("twitter4j.http.useSSL", "false");
         AccessToken a = new AccessToken(accessToken, accessSecret);
         twitter.setOAuthAccessToken(a);
+
         newTweetString = "";
 
         currentUserAccountImage = new JLabel();
@@ -115,8 +121,9 @@ public class MainFrame
         }
         catch (MalformedURLException mu){}
 
-        ImageIcon img = new ImageIcon(url);
-        currentUserAccountImage.setIcon(img);
+        overallPanel = new JPanel(new BorderLayout());
+
+        currentUserAccountImage.setIcon(new ImageIcon(url));
         newTweetTextField = new JTextField();
         currentUserHandle = new JLabel("@Twit4Java");
         tweetButton = new JButton("Tweet");
@@ -128,76 +135,81 @@ public class MainFrame
         profileViewNumFollowingLabel = new JLabel("[X] following");
     }
 
-    public void displayInterface() {
-        fr.setSize(1250, 650);
-        fr.setResizable(false);
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void displayInterface () {
+        fr.setSize(1250, 650); // invoke setSize mutator method on JFrame object referenced by fr
+        fr.setResizable(false); // do not allow resizing of window
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // automatically reset JVM upon closing
 
-        JPanel overallPanel = new JPanel(new BorderLayout());
+        // invoke methods to add left (new Tweet), center (Timeline), and right (Profile view) panels
+        addLeftPanel();
+        addCenterPanel();
+        addRightPanel();
 
-        addLeftPanel(overallPanel);
-        addCenterPanel(overallPanel);
-        addRightPanel(overallPanel);
-
+        // invoke mutator methods on fr to add overallPanel and display it in the window frame
         fr.add(overallPanel);
         fr.setVisible(true);
     }
 
-    private void addLeftPanel(JPanel overallP) {
-        JPanel leftPanel = new JPanel(new GridLayout(8, 1));
+    private void addLeftPanel () {
+        JPanel leftPanel = new JPanel(new GridLayout(10, 1)); // declare and initialize new leftPanel object reference
 
+        // set font for New Tweet controls
         newTweetTextField.setFont(defaultUIFont);
         tweetButton.setFont(new Font("Arial", Font.BOLD, 16));
-
+        // add New Tweet controls to leftPanel
         leftPanel.add(newTweetTextField);
         leftPanel.add(tweetButton);
 
-        JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2));
+        JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2)); // initialize panel for displaying information about the current user's account
         currentUserHandle.setFont(defaultUIFontBold);
+        // add current user info to currentUserAccountPanel
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
 
+        // add currentUserAccountPanel to the entire leftPanel; will be below New Tweet controls
         leftPanel.add(currentUserAccountPanel);
 
         class TweetButtonListener implements ActionListener
         {
-            public void actionPerformed(ActionEvent e) {
-                newTweetString = newTweetTextField.getText();
-
-                if ((newTweetString==null) || (newTweetString.length() > 131)) {
-                    // System.out.println("Tweet cannot exceed 140 characters!");
-
+            public void actionPerformed (ActionEvent e) { // implement actionPerformed() method defined in ActionListener interface
+                newTweetString = newTweetTextField.getText(); // get text from the New Tweet JTextField
+                if (newTweetString.length() > 131) {
+                    // if user's new tweet exceeds 140 characters (after Twit4Java's added timestamp), show pop-up warning (and prevent tweeting)
                     JOptionPane characterLengthWarningPane = new JOptionPane();
                     characterLengthWarningPane.showMessageDialog(null, "Tweet cannot exceed 140 characters!", "Tweet Length", JOptionPane.WARNING_MESSAGE);
                 }
+                else if (newTweetString==null) {
+                    // if user's new tweet is null, display a warning (and prevent tweeting)
+                    JOptionPane nullTweetWarningPane = new JOptionPane();
+                    nullTweetWarningPane.showMessageDialog(null, "You must enter some text to tweet!", "Tweet Length", JOptionPane.WARNING_MESSAGE);
+                }
                 else {
+                    // Twit4Java appends a timestamp at the end of new tweet and then tweets the user's text
                     GregorianCalendar calendar = new GregorianCalendar();
-                    int hour = calendar.get(Calendar.HOUR);
-                    int minute = calendar.get(Calendar.MINUTE);
-                    int second = calendar.get(Calendar.SECOND);
                     try {
-                        Status status = twitter.updateStatus(newTweetString + " " + hour + ":" + minute + ":" + second);
-                        newTweetTextField.setText("");
+                        Status status = twitter.updateStatus(newTweetString + " " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND));
+                        newTweetTextField.setText(""); // clear the new tweet JTextField
                     }
                     catch (TwitterException te) {}
                 }
             }
         }
 
-        tweetButton.addActionListener(new TweetButtonListener());
+        tweetButton.addActionListener(new TweetButtonListener()); // add new instance of TweetButtonListener to the TweetButton
         leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
-        overallP.add(leftPanel, BorderLayout.WEST);
+        overallPanel.add(leftPanel, BorderLayout.WEST); // add the leftPanel to the overall panel on the left (west) side
     }
 
-    private void addCenterPanel(JPanel overallP) {
-        JPanel centerPanel = new JPanel(new GridLayout(5, 1));
-        ResponseList<Status> statusList;
-        ArrayList<TweetData> tweetDataList = new ArrayList<TweetData>();
+    private void addCenterPanel () {
+        JPanel centerPanel = new JPanel(new GridLayout(5, 1)); // declare and initialize new centerPanel object reference
+        ResponseList<Status> statusList; // List to hold latest Timeline data retrieved from Twitter
+        ArrayList<TweetData> tweetDataList = new ArrayList<TweetData>(); // ArrayList to hold data for the latest 5 tweets from Timeline
         try {
-            statusList = twitter.getHomeTimeline();
+            statusList = twitter.getHomeTimeline(); // invoke getHomeTimeline accessor method and retreive latest Timeline tweets
             // System.out.println("@" + statusList.get(0).getUser().getScreenName() + " — " + statusList.get(0).getText());
 
             for (int i=0; i<5; i++) {
+                // add data for the latest 5 tweets from Timeline to new instances of TweetData class
                 User u = statusList.get(i).getUser();
                 String strUrl = u.getProfileImageURL();
                 URL picURL;
@@ -212,44 +224,46 @@ public class MainFrame
             }
 
             for (int i=0; i<5; i++) {
-                displayTweet(tweetDataList.get(i), centerPanel);
+                displayTweet(tweetDataList.get(i), centerPanel); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
             }
         } 
         catch (TwitterException te) {
             System.out.println("COULD NOT GET TIMELINE STATUS");
         }
-        overallP.add(centerPanel, BorderLayout.CENTER);
+        overallPanel.add(centerPanel, BorderLayout.CENTER); // add centerPanel to the overall panel in the center
     }
 
-    private void addRightPanel(JPanel overallP) {
-        JPanel rightPanel = new JPanel(new GridLayout(8, 1));
+    private void addRightPanel () {
+        JPanel rightPanel = new JPanel(new GridLayout(8, 1)); // declare and initialize new rightPanel object reference
 
+        // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
         profileViewNumTweetsLabel.setFont(defaultUIFont);
         profileViewNumFollowersLabel.setFont(defaultUIFont);
         profileViewNumFollowingLabel.setFont(defaultUIFont);
-        
+
+        // add profileView components to rightPanel
         rightPanel.add(profileViewUserAccountImage);
         rightPanel.add(profileViewUserHandle);
         rightPanel.add(profileViewNumTweetsLabel);
         rightPanel.add(profileViewNumFollowersLabel);
         rightPanel.add(profileViewNumFollowingLabel);
-        
+
         rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
 
-        overallP.add(rightPanel, BorderLayout.EAST);
+        overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
     }
 
     private void displayTweet(TweetData t, JPanel p) {
-        JPanel tweetPanel = new JPanel(new GridBagLayout());
-        JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1));
+        JPanel tweetPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel to hold components for tweet and its data
+        JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1)); // declare and initialize new JPanel specifically to hold text and username of Tweet
         GridBagConstraints gbc = new GridBagConstraints();
-        
-        JLabel userIconImage = new JLabel();
+
+        JLabel userIconImage = new JLabel(); // declare and initialize new JLabel to hold account avatar of user
         ImageIcon uImageIcon = t.getUserIcon();
         userIconImage.setIcon(uImageIcon);
 
-        JLabel userHandleLabel = new JLabel(t.getUserHandle());
+        JLabel userHandleLabel = new JLabel(t.getUserHandle()); // declare and initialize new JLabel to display user's handle
         userHandleLabel.setFont(defaultUIFontBold);
 
         int spaces2add = 110 - (t.getTweetText().length());
@@ -260,12 +274,14 @@ public class MainFrame
             }
         }
 
-        JLabel tweetTextLabel = new JLabel(tweetText);
+        JLabel tweetTextLabel = new JLabel(tweetText); // declare and initialize new JLabel with tweetText passed in as a parameter in the JLabel constructor
         tweetTextLabel.setFont(defaultUIFont);
+        // add user handle and tweet text itself to the tweetTextPanel within a panel
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
 
         class RetweetListener implements MouseListener {
+            // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
             }
 
@@ -278,9 +294,10 @@ public class MainFrame
             public void mousePressed (MouseEvent e) {
                 // retweet logic
                 try {
-                twitter.retweetStatus(t.getID());
-                System.out.println("Successfully rt'd");
-            } catch(TwitterException te) {}
+                    twitter.retweetStatus(t.getID()); // invoke retweetStatus on twitter object reference, pass in ID of the tweet as parameter
+                    System.out.println("Successfully retweeted");
+                }
+                catch (TwitterException te) {}
             }
 
             public void mouseReleased (MouseEvent e) {
@@ -288,6 +305,7 @@ public class MainFrame
         }
 
         class FavoriteListener implements MouseListener {
+            // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
             }
 
@@ -300,15 +318,17 @@ public class MainFrame
             public void mousePressed (MouseEvent e) {
                 // favorite logic
                 try {
-                    Status rT = twitter.createFavorite(t.getID());
-                    System.out.println("Successfully fav'd");
-                } catch(TwitterException te) {}
+                    Status rT = twitter.createFavorite(t.getID()); // invoke createFavorite, pass in ID of the tweet as parameter
+                    System.out.println("Successfully favorited");
+                }
+                catch (TwitterException te) {}
             }
 
             public void mouseReleased (MouseEvent e) {
             }
         }
 
+        // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
         favoriteLabel.addMouseListener(new FavoriteListener());
@@ -333,6 +353,7 @@ public class MainFrame
         p.add(tweetPanel);
 
         class UserLabelListener implements MouseListener {
+            // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
             }
 
@@ -343,6 +364,8 @@ public class MainFrame
             }
 
             public void mousePressed (MouseEvent e) {
+                // when mouse is pressed on component, it will take that tweet's user and display basic info on the profile view on the right side
+                // updates components of Profile view with info about user
                 profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
 
@@ -355,17 +378,18 @@ public class MainFrame
             }
         }
 
+        // add a new UserLabelListener to both the userHandleLabel and userIconImage (if either is pressed, Profile view on the right will update with info about user)
         UserLabelListener uLL = new UserLabelListener();
         userHandleLabel.addMouseListener(uLL);
         userIconImage.addMouseListener(uLL);
     }
 
-    public ImageIcon createImageIcon(String path) {
+    public ImageIcon createImageIcon (String path) {
         URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
-            System.err.println("Couldn't find file: " + path);
+            System.err.println("Could not find file: " + path);
             return null;
         }
     }

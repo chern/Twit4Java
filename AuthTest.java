@@ -17,8 +17,8 @@ import java.util.Calendar;
 /**
  * Write a description of class AuthTest here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Nishan D'Souza
+ * @version N/A
  */
 public class AuthTest
 {
