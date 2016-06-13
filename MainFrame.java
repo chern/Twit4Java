@@ -47,7 +47,7 @@ import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
 /*
  * username - nishand@gmail.com or Twit4Java (email preferred)
- * password - nishanandchern (yeah i know, very unique)
+ * 
  */
 /**
  * MainPanel
