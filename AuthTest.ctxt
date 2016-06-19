@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.params=args
-comment0.target=void\ main(java.lang.String[])
-comment0.text=\n\ This\ class\ is\ a\ means\ of\ testing\ OAUth,\ one\ of\ the\ hardest\ things\ we've\ worked\ with.\ It\ uses\ various\ keys\ to\ authenticate\ a\ user\ and\ allow\ us\ to\ do\ various\ twitter\ commands\n
-numComments=1
