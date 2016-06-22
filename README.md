@@ -5,11 +5,11 @@
 ### About
 Twit4Java is a basic Twitter client written in Java. We are making this for fun and as our final project in our Computer Programming class.
 
-### Steps needed to run
-In order to be able to run Twit4Java, you will need to do the following things.
-- Add Twitter4J's jar files to your IDE's classpath. In BlueJ, do the following - BlueJ->Preferences-Libraries
-- Make sure Twitter is working fine on your current network
-- Run the TwitStarter class
+### Running this project
+In order to run Twit4Java, you will need to do the following things—
+- Add the Twitter4J `.jar` files to your IDE's classpath. In BlueJ, do the following: BlueJ -> Preferences -> Libraries
+- Ensure that you can access Twitter over your current network
+- Run `main()` method in the TwitStarter class
 
 ### Technologies
 Twit4Java uses the [Twitter4J](http://twitter4j.org/en/index.html) library.
