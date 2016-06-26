@@ -45,6 +45,7 @@ import java.util.Calendar;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.FlowLayout;
+import java.awt.Insets;
 /*
  * username - nishand@gmail.com or Twit4Java (email preferred)
  * 
@@ -265,6 +266,7 @@ public class MainFrame
                 }
                 constraints.anchor = GridBagConstraints.WEST;
                 constraints.weightx = 1;
+                constraints.insets = new Insets(20,20,20,20);
                 displayTweet(tweetDataList.get(i), centerPanel, constraints); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
             }
         } 
