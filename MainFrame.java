@@ -164,7 +164,9 @@ public class MainFrame
         // add New Tweet controls to leftPanel
         leftPanel.add(newTweetTextField);
         leftPanel.add(tweetButton);
-
+        for(int i = 0; i <7; i++) {
+            leftPanel.add(new JPanel());
+        }
         JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2)); // initialize panel for displaying information about the current user's account
         currentUserHandle.setFont(defaultUIFontBold);
         // add current user info to currentUserAccountPanel
@@ -322,11 +324,11 @@ public class MainFrame
         // add user handle and tweet text itself to the tweetTextPanel within a panel
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
-        
+
         // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
         JLabel retweetLabel = new JLabel();
         retweetLabel.setIcon(retweet);
-        
+
         class RetweetListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
@@ -352,10 +354,10 @@ public class MainFrame
             public void mouseReleased (MouseEvent e) {
             }
         }
-        
+
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
-        
+
         class FavoriteListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
@@ -381,10 +383,10 @@ public class MainFrame
             public void mouseReleased (MouseEvent e) {
             }
         }
-        
+
         retweetLabel.addMouseListener(new RetweetListener());
         favoriteLabel.addMouseListener(new FavoriteListener());
-        
+
         JPanel actionPanel = new JPanel(new GridLayout(1,2));
         actionPanel.add(favoriteLabel);
         actionPanel.add(retweetLabel);
