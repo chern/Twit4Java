@@ -76,7 +76,9 @@ public class MainFrame
     private URL url;
 
     private ImageIcon favoritePic;
+    private ImageIcon favoriteHover;
     private ImageIcon retweet;
+    private ImageIcon retweetHover;
 
     private JLabel profileViewUserAccountImage;
     private JLabel profileViewUserHandle;
@@ -87,7 +89,9 @@ public class MainFrame
     public MainFrame () {
         // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
+        favoriteHover = createImageIcon("heart_button_hover.png");
         retweet = createImageIcon("retweet_button_default.png");
+        retweetHover = createImageIcon("retweet_button_hover.png");
         fr = new JFrame("Twit4Java"); // initialize JFrame object reference
 
         // OAuth authentication
@@ -279,16 +283,22 @@ public class MainFrame
         // add user handle and tweet text itself to the tweetTextPanel within a panel
         tweetTextPanel.add(userHandleLabel);
         tweetTextPanel.add(tweetTextLabel);
-
+        
+        // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
+        JLabel retweetLabel = new JLabel();
+        retweetLabel.setIcon(retweet);
+        
         class RetweetListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
             }
 
             public void mouseEntered (MouseEvent e) {
+                retweetLabel.setIcon(retweetHover);
             }
 
             public void mouseExited (MouseEvent e) {
+                retweetLabel.setIcon(retweet);
             }
 
             public void mousePressed (MouseEvent e) {
@@ -303,16 +313,21 @@ public class MainFrame
             public void mouseReleased (MouseEvent e) {
             }
         }
-
+        
+        JLabel favoriteLabel = new JLabel();
+        favoriteLabel.setIcon(favoritePic);
+        
         class FavoriteListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
             }
 
             public void mouseEntered (MouseEvent e) {
+                favoriteLabel.setIcon(favoriteHover);
             }
 
             public void mouseExited (MouseEvent e) {
+                favoriteLabel.setIcon(favoritePic);
             }
 
             public void mousePressed (MouseEvent e) {
@@ -327,14 +342,10 @@ public class MainFrame
             public void mouseReleased (MouseEvent e) {
             }
         }
-
-        // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
-        JLabel favoriteLabel = new JLabel();
-        favoriteLabel.setIcon(favoritePic);
-        favoriteLabel.addMouseListener(new FavoriteListener());
-        JLabel retweetLabel = new JLabel();
-        retweetLabel.setIcon(retweet);
+        
         retweetLabel.addMouseListener(new RetweetListener());
+        favoriteLabel.addMouseListener(new FavoriteListener());
+        
         JPanel actionPanel = new JPanel(new GridLayout(1,2));
         actionPanel.add(favoriteLabel);
         actionPanel.add(retweetLabel);
