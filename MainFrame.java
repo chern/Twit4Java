@@ -205,7 +205,9 @@ public class MainFrame
     }
 
     private void addCenterPanel () {
-        JPanel centerPanel = new JPanel(new GridLayout(5, 1)); // declare and initialize new centerPanel object reference
+        JPanel centerPanel = new JPanel(new GridBagLayout()); // declare and initialize new centerPanel object reference
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
         ResponseList<Status> statusList; // List to hold latest Timeline data retrieved from Twitter
         ArrayList<TweetData> tweetDataList = new ArrayList<TweetData>(); // ArrayList to hold data for the latest 5 tweets from Timeline
         try {
@@ -228,7 +230,42 @@ public class MainFrame
             }
 
             for (int i=0; i<5; i++) {
-                displayTweet(tweetDataList.get(i), centerPanel); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
+                switch(i) {
+                    case 0:
+                    constraints.anchor = GridBagConstraints.WEST;
+                    constraints.weightx = 1;
+                    constraints.gridx = 0;
+                    constraints.gridy = 0;
+                    break;
+                    case 1:
+                    constraints.anchor = GridBagConstraints.WEST;
+                    constraints.weightx = 1;
+                    constraints.gridx = 0;
+                    constraints.gridy = 1;
+                    break;
+                    case 2:
+                    constraints.anchor = GridBagConstraints.WEST;
+                    constraints.weightx = 1;
+                    constraints.gridx = 0;
+                    constraints.gridy = 2;
+                    break;
+                    case 3:
+                    constraints.anchor = GridBagConstraints.WEST;
+                    constraints.weightx = 1;
+                    constraints.gridx = 0;
+                    constraints.gridy = 3;
+                    break;
+                    case 4:
+                    constraints.anchor = GridBagConstraints.WEST;
+                    constraints.weightx = 1;
+                    constraints.gridx = 0;
+                    constraints.gridy = 4;
+                    break;
+                    default: break;
+                }
+                constraints.anchor = GridBagConstraints.WEST;
+                constraints.weightx = 1;
+                displayTweet(tweetDataList.get(i), centerPanel, constraints); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
             }
         } 
         catch (TwitterException te) {
@@ -258,7 +295,7 @@ public class MainFrame
         overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
     }
 
-    private void displayTweet(TweetData t, JPanel p) {
+    private void displayTweet(TweetData t, JPanel p, GridBagConstraints constraints) {
         JPanel tweetPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel to hold components for tweet and its data
         JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1)); // declare and initialize new JPanel specifically to hold text and username of Tweet
         GridBagConstraints gbc = new GridBagConstraints();//in order to lay the tweets correctly, we use GridBagLayout to fix spacing between text and images
@@ -352,7 +389,6 @@ public class MainFrame
         tweetTextPanel.add(actionPanel);
 
         gbc.anchor = GridBagConstraints.WEST;//using GridBagContraints values, anchors the text and images in the Layout
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;//sets the x and y of the grid to 0,0 the upper left corner
         gbc.gridy = 0;
         tweetPanel.add(userIconImage, gbc);//adds profile pic to the position in the gridbag layout
@@ -361,7 +397,7 @@ public class MainFrame
         gbc.gridy = 0;
         gbc.gridwidth = 4;//sets the width of this to 4, 4 times that of the picture
         tweetPanel.add(tweetTextPanel, gbc);//adds the text for the tweet in the upper right in the gridbaglayout
-        p.add(tweetPanel);
+        p.add(tweetPanel, constraints);
 
         class UserLabelListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
