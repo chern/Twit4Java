@@ -17,6 +17,10 @@ Twit4Java uses the [Twitter4J](http://twitter4j.org/en/index.html) library.
 ### Authors
 Twit4Java is brought to you by [@wchern](https://github.com/wchern) and [@nishand17](https://github.com/nishand17).
 
-
+###Versions and Updates
+Twit4Java is currently on version 1.0, but we have big plans for future updates. Below are details of what future versions will include
+- 1.1: Hover and Layout fixes on Favorites and Retweet, Tweet Layout fixes, Second line implementation
+- 1.2: UI Updates(Backgrounds, Horizontal Lines), Profile View
+- 2.0: Twitter Bot
 
 ###### GitHub Project Site: https://wchern.github.io/Twit4Java/
