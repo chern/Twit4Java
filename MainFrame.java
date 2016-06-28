@@ -268,7 +268,7 @@ public class MainFrame
                 }
                 constraints.anchor = GridBagConstraints.WEST;
                 constraints.weightx = 1;
-                constraints.insets = new Insets(20,20,20,20);
+                constraints.insets = new Insets(30,30,30,30);
                 displayTweet(tweetDataList.get(i), centerPanel, constraints); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
             }
         } 
@@ -301,7 +301,10 @@ public class MainFrame
 
     private void displayTweet(TweetData t, JPanel p, GridBagConstraints constraints) {
         JPanel tweetPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel to hold components for tweet and its data
-        JPanel tweetTextPanel = new JPanel(new GridLayout(3, 1)); // declare and initialize new JPanel specifically to hold text and username of Tweet
+        JPanel tweetTextPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel specifically to hold text and username of Tweet
+        GridBagConstraints textConstraints = new GridBagConstraints();
+        textConstraints.anchor = GridBagConstraints.WEST;
+        textConstraints.weightx = 1;
         GridBagConstraints gbc = new GridBagConstraints();//in order to lay the tweets correctly, we use GridBagLayout to fix spacing between text and images
 
         JLabel userIconImage = new JLabel(); // declare and initialize new JLabel to hold account avatar of user
@@ -322,8 +325,12 @@ public class MainFrame
         JLabel tweetTextLabel = new JLabel(tweetText); // declare and initialize new JLabel with tweetText passed in as a parameter in the JLabel constructor
         tweetTextLabel.setFont(defaultUIFont);
         // add user handle and tweet text itself to the tweetTextPanel within a panel
-        tweetTextPanel.add(userHandleLabel);
-        tweetTextPanel.add(tweetTextLabel);
+        textConstraints.gridx = 0;
+        textConstraints.gridy = 0;
+        tweetTextPanel.add(userHandleLabel, textConstraints);
+        textConstraints.gridx = 0;
+        textConstraints.gridy = 1;
+        tweetTextPanel.add(tweetTextLabel, textConstraints);
 
         // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
         JLabel retweetLabel = new JLabel();
@@ -387,10 +394,18 @@ public class MainFrame
         retweetLabel.addMouseListener(new RetweetListener());
         favoriteLabel.addMouseListener(new FavoriteListener());
 
-        JPanel actionPanel = new JPanel(new GridLayout(1,2));
-        actionPanel.add(favoriteLabel);
-        actionPanel.add(retweetLabel);
-        tweetTextPanel.add(actionPanel);
+        JPanel actionPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints actionConstraints = new GridBagConstraints();
+        actionConstraints.anchor = GridBagConstraints.WEST;
+        actionConstraints.gridx = 0;
+        actionConstraints.gridy = 0;
+        actionPanel.add(favoriteLabel, actionConstraints);
+        actionConstraints.gridx = 1;
+        actionConstraints.gridy = 0;
+        actionPanel.add(retweetLabel, actionConstraints);
+        textConstraints.gridx = 0;
+        textConstraints.gridy = 2;
+        tweetTextPanel.add(actionPanel, textConstraints);
 
         gbc.anchor = GridBagConstraints.WEST;//using GridBagContraints values, anchors the text and images in the Layout
         gbc.gridx = 0;//sets the x and y of the grid to 0,0 the upper left corner
