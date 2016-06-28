@@ -315,15 +315,25 @@ public class MainFrame
         userHandleLabel.setFont(defaultUIFontBold);
 
         int spaces2add = 110 - (t.getTweetText().length());
-        String tweetText = t.getTweetText();
+        String tweetText = t.getTweetText();        
+        String second = "";
+        boolean secondLine = false;
+        if(tweetText.length()>120) {
+            tweetText = tweetText.substring(0,120);
+            second = tweetText.substring(120);
+            System.out.println(second);
+            secondLine = true;
+        }
         if(spaces2add>30) {
             for(int i = 0; i < spaces2add; i++) {
                 tweetText = tweetText + " ";
             }
         }
-
+        
         JLabel tweetTextLabel = new JLabel(tweetText); // declare and initialize new JLabel with tweetText passed in as a parameter in the JLabel constructor
         tweetTextLabel.setFont(defaultUIFont);
+        JLabel secondLineLabel = new JLabel();
+        if(secondLine == true) secondLineLabel.setText(second);
         // add user handle and tweet text itself to the tweetTextPanel within a panel
         textConstraints.gridx = 0;
         textConstraints.gridy = 0;
@@ -331,6 +341,11 @@ public class MainFrame
         textConstraints.gridx = 0;
         textConstraints.gridy = 1;
         tweetTextPanel.add(tweetTextLabel, textConstraints);
+        if(secondLine == true) {
+            textConstraints.gridx = 0;
+            textConstraints.gridy = 2;
+            tweetTextPanel.add(secondLineLabel, textConstraints);
+        }        
 
         // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
         JLabel retweetLabel = new JLabel();
@@ -403,8 +418,15 @@ public class MainFrame
         actionConstraints.gridx = 1;
         actionConstraints.gridy = 0;
         actionPanel.add(retweetLabel, actionConstraints);
-        textConstraints.gridx = 0;
-        textConstraints.gridy = 2;
+        if(secondLine == true) {
+            textConstraints.gridx = 0;
+            textConstraints.gridy = 3;
+        }
+        else {
+            textConstraints.gridx = 0;
+            textConstraints.gridy = 2;
+        }
+        
         tweetTextPanel.add(actionPanel, textConstraints);
 
         gbc.anchor = GridBagConstraints.WEST;//using GridBagContraints values, anchors the text and images in the Layout
