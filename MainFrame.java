@@ -279,7 +279,7 @@ public class MainFrame
     }
 
     private void addRightPanel () {
-        JPanel rightPanel = new JPanel(new GridLayout(8, 1)); // declare and initialize new rightPanel object reference
+        JPanel rightPanel = new JPanel(new GridLayout(13, 1)); // declare and initialize new rightPanel object reference
 
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
