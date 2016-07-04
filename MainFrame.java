@@ -279,6 +279,13 @@ public class MainFrame
     }
 
     private void addRightPanel () {
+        /*
+         * Plan for enhanced profile view:
+         * 1. Add 3-4 labels/images similar to tweets in addRightPanel
+         * 2. Make new displayTweet which runs off of the current display tweet action listener
+         * 3. Add listener to that new displayTweet, where when label is clicked new frame shows
+         * 4. Add listener to buttons in new frame for fav and rt
+         */
         JPanel rightPanel = new JPanel(new GridLayout(13, 1)); // declare and initialize new rightPanel object reference
 
         // set font to default UI fonts
