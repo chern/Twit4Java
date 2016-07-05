@@ -86,7 +86,11 @@ public class MainFrame
     private JLabel profileViewNumTweetsLabel;
     private JLabel profileViewNumFollowersLabel;
     private JLabel profileViewNumFollowingLabel;
-
+    private JLabel profileTweet1;
+    private JLabel profileTweet2;
+    private JLabel profileTweet3;
+    private JLabel profileTweet4;
+    private JPanel rightPanel;
     public MainFrame () {
         // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
@@ -138,6 +142,10 @@ public class MainFrame
         profileViewNumTweetsLabel = new JLabel("[X] tweets");
         profileViewNumFollowersLabel = new JLabel("[X] followers");
         profileViewNumFollowingLabel = new JLabel("[X] following");
+        profileTweet1 = new JLabel("");
+        profileTweet2 = new JLabel("");
+        profileTweet3 = new JLabel("");
+        profileTweet4 = new JLabel("");
     }
 
     public void displayInterface () {
@@ -269,7 +277,7 @@ public class MainFrame
                 constraints.anchor = GridBagConstraints.WEST;
                 constraints.weightx = 1;
                 constraints.insets = new Insets(30,30,30,30);
-                displayTweet(tweetDataList.get(i), centerPanel, constraints); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
+                displayTweet(tweetDataList.get(i), centerPanel, constraints, rightPanel); // invoke displayTweet method to display Tweet and its data and add to center Timeline panel
             }
         } 
         catch (TwitterException te) {
@@ -286,7 +294,7 @@ public class MainFrame
          * 3. Add listener to that new displayTweet, where when label is clicked new frame shows
          * 4. Add listener to buttons in new frame for fav and rt
          */
-        JPanel rightPanel = new JPanel(new GridLayout(13, 1)); // declare and initialize new rightPanel object reference
+        rightPanel = new JPanel(new GridLayout(13, 1)); // declare and initialize new rightPanel object reference
 
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
@@ -300,13 +308,17 @@ public class MainFrame
         rightPanel.add(profileViewNumTweetsLabel);
         rightPanel.add(profileViewNumFollowersLabel);
         rightPanel.add(profileViewNumFollowingLabel);
-
+        
+        rightPanel.add(profileTweet1);
+        rightPanel.add(profileTweet2);
+        rightPanel.add(profileTweet3);
+        rightPanel.add(profileTweet4);
         rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
 
         overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
     }
 
-    private void displayTweet(TweetData t, JPanel p, GridBagConstraints constraints) {
+    private void displayTweet(TweetData t, JPanel p, GridBagConstraints constraints, JPanel profilePanel) {
         JPanel tweetPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel to hold components for tweet and its data
         JPanel tweetTextPanel = new JPanel(new GridBagLayout()); // declare and initialize new JPanel specifically to hold text and username of Tweet
         GridBagConstraints textConstraints = new GridBagConstraints();
@@ -459,10 +471,10 @@ public class MainFrame
                 // updates components of Profile view with info about user
                 profileViewUserAccountImage.setIcon(t.getUserIcon());
                 profileViewUserHandle.setText(t.getUserHandle());
-
                 profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");//uses various accessor methods of tweetData to set the text of the labels to those values
                 profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
                 profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
+                
             }
 
             public void mouseReleased (MouseEvent e) {
