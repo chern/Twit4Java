@@ -235,7 +235,8 @@ public class MainFrame
                     picURL = new URL(strUrl);
                     profileImg = new ImageIcon(picURL);
                     long tweetID = statusList.get(i).getId();
-                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount(), statusList.get(i).getUser().getFriendsCount(), tweetID));
+                    long userID = statusList.get(i).getUser().getId();
+                    tweetDataList.add(new TweetData("@" + statusList.get(i).getUser().getScreenName(), statusList.get(i).getText(), profileImg, statusList.get(i).getRetweetCount(), statusList.get(i).getFavoriteCount(), statusList.get(i).getUser().getStatusesCount(), statusList.get(i).getUser().getFollowersCount(), statusList.get(i).getUser().getFriendsCount(), tweetID, userID));
                 } catch(MalformedURLException te) {
                 }
             }
@@ -474,6 +475,15 @@ public class MainFrame
                 profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");//uses various accessor methods of tweetData to set the text of the labels to those values
                 profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
                 profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
+                
+                ResponseList<Status> userTweets;
+                ArrayList<TweetData> userTweetDataList = new ArrayList<TweetData>();
+                try {
+                    userTweets = twitter.getUserTimeline(t.getUserID());
+                    for(int i = 0; i < 4; i++) {
+                    }
+                } catch(TwitterException te) {}
+                
                 
             }
 

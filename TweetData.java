@@ -20,8 +20,9 @@ public class TweetData
     private int followersCount;
     private int followingCount;
     private long tweetID;
+    private long userID;
     // various private instance fields to hold the values of the twitter object
-    public TweetData(String u, String t, ImageIcon i, int r, int f, int numTweets, int followers, int following, long id) {
+    public TweetData(String u, String t, ImageIcon i, int r, int f, int numTweets, int followers, int following, long id, long uid) {
         userHandle = u;
         tweetText = t;
         userIcon = i;
@@ -31,6 +32,7 @@ public class TweetData
         followersCount = followers;
         followingCount = following;
         tweetID = id;
+        userID = uid;
     }
     // various accessor methods for the TweetDate class
     public String getUserHandle() {
@@ -66,5 +68,8 @@ public class TweetData
     }
     public long getID() {
         return tweetID;
+    }
+    public long getUserID() {
+        return userID;
     }
 }
