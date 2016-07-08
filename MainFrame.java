@@ -91,6 +91,7 @@ public class MainFrame
     private JLabel profileTweet3;
     private JLabel profileTweet4;
     private JPanel rightPanel;
+    
     public MainFrame () {
         // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
@@ -129,7 +130,7 @@ public class MainFrame
             url = new URL(u);//gets the url for the user's profile pic
         }
         catch (MalformedURLException mu){}
-
+        
         overallPanel = new JPanel(new BorderLayout());
 
         currentUserAccountImage.setIcon(new ImageIcon(url));//invokes setIcon with new image icon from the url
