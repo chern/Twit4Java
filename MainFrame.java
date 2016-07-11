@@ -482,6 +482,7 @@ public class MainFrame
                 try {
                     userTweets = twitter.getUserTimeline(t.getUserID());
                     for(int i = 0; i < 4; i++) {
+                        
                     }
                 } catch(TwitterException te) {}
                 
