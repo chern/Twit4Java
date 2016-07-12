@@ -91,7 +91,7 @@ public class MainFrame
     private JLabel profileTweet3;
     private JLabel profileTweet4;
     private JPanel rightPanel;
-    
+    private JLabel tweetTitleLabel;
     public MainFrame () {
         // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
@@ -147,6 +147,7 @@ public class MainFrame
         profileTweet2 = new JLabel("");
         profileTweet3 = new JLabel("");
         profileTweet4 = new JLabel("");
+        tweetTitleLabel = new JLabel("User Tweets:");
     }
 
     public void displayInterface () {
@@ -296,7 +297,7 @@ public class MainFrame
          * 3. Add listener to that new displayTweet, where when label is clicked new frame shows
          * 4. Add listener to buttons in new frame for fav and rt
          */
-        rightPanel = new JPanel(new GridLayout(13, 1)); // declare and initialize new rightPanel object reference
+        rightPanel = new JPanel(new GridLayout(14, 1)); // declare and initialize new rightPanel object reference
 
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
@@ -311,6 +312,7 @@ public class MainFrame
         rightPanel.add(profileViewNumFollowersLabel);
         rightPanel.add(profileViewNumFollowingLabel);
         
+        rightPanel.add(tweetTitleLabel);
         rightPanel.add(profileTweet1);
         rightPanel.add(profileTweet2);
         rightPanel.add(profileTweet3);
@@ -520,7 +522,7 @@ public class MainFrame
     
     public void displayUserTweets(TweetData t, JLabel tweetTextLabel) {
         String text = t.getTweetText();
-        String shortText = text.substring(0,35);
+        String shortText = " '" + text.substring(0,35) + "'";
         tweetTextLabel.setText(shortText);
     }
 }
