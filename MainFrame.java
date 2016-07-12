@@ -297,8 +297,11 @@ public class MainFrame
          * 3. Add listener to that new displayTweet, where when label is clicked new frame shows
          * 4. Add listener to buttons in new frame for fav and rt
          */
-        rightPanel = new JPanel(new GridLayout(14, 1)); // declare and initialize new rightPanel object reference
-
+        rightPanel = new JPanel(new GridBagLayout()); // declare and initialize new rightPanel object reference
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.weightx = 1;
+        gbc.insets = new Insets(10, 10, 10, 10);
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
         profileViewNumTweetsLabel.setFont(defaultUIFont);
@@ -306,17 +309,36 @@ public class MainFrame
         profileViewNumFollowingLabel.setFont(defaultUIFont);
 
         // add profileView components to rightPanel
-        rightPanel.add(profileViewUserAccountImage);
-        rightPanel.add(profileViewUserHandle);
-        rightPanel.add(profileViewNumTweetsLabel);
-        rightPanel.add(profileViewNumFollowersLabel);
-        rightPanel.add(profileViewNumFollowingLabel);
-        
-        rightPanel.add(tweetTitleLabel);
-        rightPanel.add(profileTweet1);
-        rightPanel.add(profileTweet2);
-        rightPanel.add(profileTweet3);
-        rightPanel.add(profileTweet4);
+        gbc.gridx = 0; 
+        gbc.gridy = 0;
+        rightPanel.add(profileViewUserAccountImage, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 1;
+        rightPanel.add(profileViewUserHandle, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 2;
+        rightPanel.add(profileViewNumTweetsLabel, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 3;
+        rightPanel.add(profileViewNumFollowersLabel, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 4;
+        rightPanel.add(profileViewNumFollowingLabel, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 5;
+        rightPanel.add(tweetTitleLabel, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 6;
+        rightPanel.add(profileTweet1, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 7;
+        rightPanel.add(profileTweet2, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 8;
+        rightPanel.add(profileTweet3, gbc);
+        gbc.gridx = 0; 
+        gbc.gridy = 9;
+        rightPanel.add(profileTweet4, gbc);
         rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
 
         overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
