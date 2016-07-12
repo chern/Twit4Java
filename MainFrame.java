@@ -340,8 +340,8 @@ public class MainFrame
         boolean secondLine = false;
         String secondText = "";
         if(tweetText.length() > 120) {
-            secondText = tweetText.substring(120);
-            tweetText = tweetText.substring(0,120);
+            secondText = tweetText.substring(105);
+            tweetText = tweetText.substring(0,105);
             secondLine = true;
         }
         else secondLine = false;
@@ -482,11 +482,20 @@ public class MainFrame
                 try {
                     userTweets = twitter.getUserTimeline(t.getUserID());
                     for(int i = 0; i < 4; i++) {
-                        
+                        String text = userTweets.get(i).getText();
+                        userTweetDataList.add(new TweetData(t.getUserHandle(), text, t.getUserIcon(), userTweets.get(i).getRetweetCount(), userTweets.get(i).getFavoriteCount(), t.getUserNumTweets(), t.getUserFollowers(), t.getUserFollowing(), t.getID(), t.getUserID()));
                     }
                 } catch(TwitterException te) {}
                 
-                
+                for(int i = 0; i < 4; i++) {
+                  switch(i) {
+                      case 0: displayUserTweets(userTweetDataList.get(0), profileTweet1);
+                      case 1: displayUserTweets(userTweetDataList.get(1), profileTweet2);
+                      case 2: displayUserTweets(userTweetDataList.get(2), profileTweet3);
+                      case 3: displayUserTweets(userTweetDataList.get(3), profileTweet4);
+                      default: break;
+                    }
+                }
             }
 
             public void mouseReleased (MouseEvent e) {
@@ -507,5 +516,11 @@ public class MainFrame
             System.err.println("Could not find file: " + path);
             return null;
         }
+    }
+    
+    public void displayUserTweets(TweetData t, JLabel tweetTextLabel) {
+        String text = t.getTweetText();
+        String shortText = text.substring(0,35);
+        tweetTextLabel.setText(shortText);
     }
 }

@@ -13,4 +13,6 @@ comment5.params=t\ p\ constraints\ profilePanel
 comment5.target=void\ displayTweet(TweetData,\ javax.swing.JPanel,\ java.awt.GridBagConstraints,\ javax.swing.JPanel)
 comment6.params=path
 comment6.target=javax.swing.ImageIcon\ createImageIcon(java.lang.String)
-numComments=7
+comment7.params=t\ tweetTextLabel
+comment7.target=void\ displayUserTweets(TweetData,\ javax.swing.JLabel)
+numComments=8
