@@ -559,10 +559,10 @@ public class MainFrame
 
             public void mousePressed (MouseEvent e) {
                 JFrame tweetFr = new JFrame();
-                tweetFr.setSize(600, 400);
+                tweetFr.setSize(800, 100);
                 JPanel tweetP = new JPanel(new GridBagLayout());
                 GridBagConstraints bigPC = new GridBagConstraints();
-                bigPC.anchor = GridBagConstraints.WEST;
+                bigPC.anchor = GridBagConstraints.CENTER;
                 bigPC.weightx = 1;
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 JLabel textLabel = new JLabel(t.getTweetText());
@@ -586,10 +586,19 @@ public class MainFrame
                 bigPC.gridx = 0;
                 bigPC.gridy = 0;
                 tweetP.add(handleLabel, bigPC);
+                bigPC.gridx = 0;
+                bigPC.gridy = 1;
+                tweetP.add(textLabel, bigPC);
+                bigPC.gridx = 0;
+                bigPC.gridy = 2;
+                tweetP.add(buttonPanel, bigPC);
+                tweetFr.add(tweetP);
+                tweetFr.setVisible(true);
             }
 
             public void mouseReleased (MouseEvent e) {
             }
         }
+        tweetTextLabel.addMouseListener(new tweetTextListener());
     }
 }
