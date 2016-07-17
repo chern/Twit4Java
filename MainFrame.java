@@ -618,6 +618,7 @@ public class MainFrame
                 }
                 retweetLabel.addMouseListener(new retweetLabelListener());
 
+                
                 class favoriteLabelListener implements MouseListener {
                     // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
                     public void mouseClicked (MouseEvent e) {
