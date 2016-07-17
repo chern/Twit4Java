@@ -546,5 +546,34 @@ public class MainFrame
         String text = t.getTweetText();
         String shortText = " '" + text.substring(0,35) + "'";
         tweetTextLabel.setText(shortText);
+        
+        class tweetTextListener implements MouseListener {
+            public void mouseClicked (MouseEvent e) {
+            }
+
+            public void mouseEntered (MouseEvent e) {
+            }
+
+            public void mouseExited (MouseEvent e) {
+            }
+
+            public void mousePressed (MouseEvent e) {
+                JFrame tweetFr = new JFrame();
+                tweetFr.setSize(600, 400);
+                JPanel tweetP = new JPanel(new GridBagLayout());
+                GridBagConstraints bigPC = new GridBagConstraints();
+                bigPC.anchor = GridBagConstraints.WEST;
+                bigPC.weightx = 1;
+                JLabel handleLabel = new JLabel(t.getUserHandle());
+                JLabel textLabel = new JLabel(t.getTweetText());
+                ImageIcon favoriteIcon = createImageIcon("heart_button_default.png");
+                JLabel favoriteLabel = new JLabel();
+                favoriteLabel.setIcon(favoriteIcon);
+                ImageIcon retweetIcon = createImageIcon("retweet_button_default.png");
+            }
+
+            public void mouseReleased (MouseEvent e) {
+            }
+        }
     }
 }
