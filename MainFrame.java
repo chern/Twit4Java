@@ -565,6 +565,7 @@ public class MainFrame
                 bigPC.anchor = GridBagConstraints.CENTER;
                 bigPC.weightx = 1;
                 JLabel handleLabel = new JLabel(t.getUserHandle());
+                handleLabel.setFont(defaultUIFontBold);
                 JLabel textLabel = new JLabel(t.getTweetText());
                 JPanel buttonPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints buttonC = new GridBagConstraints();
@@ -591,6 +592,10 @@ public class MainFrame
                 tweetP.add(textLabel, bigPC);
                 bigPC.gridx = 0;
                 bigPC.gridy = 2;
+                
+                class retweetLabelListener {
+                }
+                
                 tweetP.add(buttonPanel, bigPC);
                 tweetFr.add(tweetP);
                 tweetFr.setVisible(true);
