@@ -566,10 +566,26 @@ public class MainFrame
                 bigPC.weightx = 1;
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 JLabel textLabel = new JLabel(t.getTweetText());
+                JPanel buttonPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints buttonC = new GridBagConstraints();
+                buttonC.anchor = GridBagConstraints.WEST;
+                buttonC.weightx = 1;
                 ImageIcon favoriteIcon = createImageIcon("heart_button_default.png");
                 JLabel favoriteLabel = new JLabel();
                 favoriteLabel.setIcon(favoriteIcon);
+                buttonC.gridx = 0;
+                buttonC.gridy = 0;
+                buttonPanel.add(favoriteLabel, buttonC);
                 ImageIcon retweetIcon = createImageIcon("retweet_button_default.png");
+                JLabel retweetLabel = new JLabel();
+                retweetLabel.setIcon(retweetIcon);
+                buttonC.gridx = 1;
+                buttonC.gridy = 0;
+                buttonPanel.add(retweetLabel, buttonC);
+                
+                bigPC.gridx = 0;
+                bigPC.gridy = 0;
+                tweetP.add(handleLabel, bigPC);
             }
 
             public void mouseReleased (MouseEvent e) {
