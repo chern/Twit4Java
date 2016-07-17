@@ -130,7 +130,7 @@ public class MainFrame
             url = new URL(u);//gets the url for the user's profile pic
         }
         catch (MalformedURLException mu){}
-        
+
         overallPanel = new JPanel(new BorderLayout());
 
         currentUserAccountImage.setIcon(new ImageIcon(url));//invokes setIcon with new image icon from the url
@@ -369,7 +369,7 @@ public class MainFrame
             secondLine = true;
         }
         else secondLine = false;
-        
+
         JLabel tweetTextLabel = new JLabel(tweetText); // declare and initialize new JLabel with tweetText passed in as a parameter in the JLabel constructor
         tweetTextLabel.setFont(defaultUIFont);
         JLabel secondTextLabel = new JLabel(secondText);
@@ -386,7 +386,6 @@ public class MainFrame
             textConstraints.gridy = 2;
             tweetTextPanel.add(secondTextLabel, textConstraints);
         }
-       
 
         // Retweet and Favorite buttons: declare, initialize, set icons, and add to dedicated actionPanel
         JLabel retweetLabel = new JLabel();
@@ -459,7 +458,7 @@ public class MainFrame
         actionConstraints.gridx = 1;
         actionConstraints.gridy = 0;
         actionPanel.add(retweetLabel, actionConstraints);
-        
+
         if(secondLine == true) {
             textConstraints.gridx = 0;
             textConstraints.gridy = 3;
@@ -500,7 +499,7 @@ public class MainFrame
                 profileViewNumTweetsLabel.setText(t.getUserNumTweets() + " Tweets");//uses various accessor methods of tweetData to set the text of the labels to those values
                 profileViewNumFollowersLabel.setText(t.getUserFollowers() + " Followers");
                 profileViewNumFollowingLabel.setText(t.getUserFollowing() + " Following");
-                
+
                 ResponseList<Status> userTweets;
                 ArrayList<TweetData> userTweetDataList = new ArrayList<TweetData>();
                 try {
@@ -510,14 +509,14 @@ public class MainFrame
                         userTweetDataList.add(new TweetData(t.getUserHandle(), text, t.getUserIcon(), userTweets.get(i).getRetweetCount(), userTweets.get(i).getFavoriteCount(), t.getUserNumTweets(), t.getUserFollowers(), t.getUserFollowing(), t.getID(), t.getUserID()));
                     }
                 } catch(TwitterException te) {}
-                
+
                 for(int i = 0; i < 4; i++) {
-                  switch(i) {
-                      case 0: displayUserTweets(userTweetDataList.get(0), profileTweet1);
-                      case 1: displayUserTweets(userTweetDataList.get(1), profileTweet2);
-                      case 2: displayUserTweets(userTweetDataList.get(2), profileTweet3);
-                      case 3: displayUserTweets(userTweetDataList.get(3), profileTweet4);
-                      default: break;
+                    switch(i) {
+                        case 0: displayUserTweets(userTweetDataList.get(0), profileTweet1);
+                        case 1: displayUserTweets(userTweetDataList.get(1), profileTweet2);
+                        case 2: displayUserTweets(userTweetDataList.get(2), profileTweet3);
+                        case 3: displayUserTweets(userTweetDataList.get(3), profileTweet4);
+                        default: break;
                     }
                 }
             }
@@ -541,12 +540,12 @@ public class MainFrame
             return null;
         }
     }
-    
+
     public void displayUserTweets(TweetData t, JLabel tweetTextLabel) {
         String text = t.getTweetText();
         String shortText = " '" + text.substring(0,35) + "'";
         tweetTextLabel.setText(shortText);
-        
+
         class tweetTextListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
@@ -583,7 +582,7 @@ public class MainFrame
                 buttonC.gridx = 1;
                 buttonC.gridy = 0;
                 buttonPanel.add(retweetLabel, buttonC);
-                
+
                 bigPC.gridx = 0;
                 bigPC.gridy = 0;
                 tweetP.add(handleLabel, bigPC);
@@ -592,10 +591,59 @@ public class MainFrame
                 tweetP.add(textLabel, bigPC);
                 bigPC.gridx = 0;
                 bigPC.gridy = 2;
-                
-                class retweetLabelListener {
+
+                class retweetLabelListener implements MouseListener {
+                    public void mouseClicked (MouseEvent e) {
+                    }
+
+                    public void mouseEntered (MouseEvent e) {
+                        retweetLabel.setIcon(retweetHover);
+                    }
+
+                    public void mouseExited (MouseEvent e) {
+                        retweetLabel.setIcon(retweet);
+                    }
+
+                    public void mousePressed (MouseEvent e) {
+                        // retweet logic
+                        try {
+                            twitter.retweetStatus(t.getID()); // invoke retweetStatus on twitter object reference, pass in ID of the tweet as parameter
+                            System.out.println("Successfully retweeted");
+                        }
+                        catch (TwitterException te) {}
+                    }
+
+                    public void mouseReleased (MouseEvent e) {
+                    }
                 }
-                
+                retweetLabel.addMouseListener(new retweetLabelListener());
+
+                class favoriteLabelListener implements MouseListener {
+                    // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
+                    public void mouseClicked (MouseEvent e) {
+                    }
+
+                    public void mouseEntered (MouseEvent e) {
+                        favoriteLabel.setIcon(favoriteHover);
+                    }
+
+                    public void mouseExited (MouseEvent e) {
+                        favoriteLabel.setIcon(favoritePic);
+                    }
+
+                    public void mousePressed (MouseEvent e) {
+                        // favorite logic
+                        try {
+                            Status rT = twitter.createFavorite(t.getID()); // invoke createFavorite, pass in ID of the tweet as parameter
+                            System.out.println("Successfully favorited");
+                        }
+                        catch (TwitterException te) {}
+                    }
+
+                    public void mouseReleased (MouseEvent e) {
+                    }
+                }
+                favoriteLabel.addMouseListener(new favoriteLabelListener());
                 tweetP.add(buttonPanel, bigPC);
                 tweetFr.add(tweetP);
                 tweetFr.setVisible(true);
