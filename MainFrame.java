@@ -552,26 +552,26 @@ public class MainFrame
         class tweetTextListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
-
             public void mouseEntered (MouseEvent e) {
             }
-
             public void mouseExited (MouseEvent e) {
             }
-
             public void mousePressed (MouseEvent e) {
                 JFrame tweetFr = new JFrame();
                 tweetFr.setSize(825, 100);
+                
                 JPanel completeTweetPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints completeGBC = new GridBagConstraints();
                 completeGBC.anchor = GridBagConstraints.WEST;
                 completeGBC.weightx = 1;
                 completeGBC.insets = new Insets(0,0,0,0);
+                
                 JLabel userIcon = new JLabel();
                 userIcon.setIcon(t.getUserIcon());
                 completeGBC.gridx = 0;
                 completeGBC.gridy = 0;
                 completeTweetPanel.add(userIcon, completeGBC);
+                
                 JPanel tweetP = new JPanel(new GridBagLayout());
                 GridBagConstraints bigPC = new GridBagConstraints();
                 bigPC.anchor = GridBagConstraints.WEST;
@@ -581,10 +581,12 @@ public class MainFrame
                 handleLabel.setFont(defaultUIFontBold);
                 JLabel textLabel = new JLabel(t.getTweetText());
                 textLabel.setFont(defaultUIFont);
+                
                 JPanel buttonPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints buttonC = new GridBagConstraints();
                 buttonC.anchor = GridBagConstraints.WEST;
                 buttonC.weightx = 1;
+                
                 ImageIcon favoriteIcon = createImageIcon("heart_button_default.png");
                 JLabel favoriteLabel = new JLabel();
                 favoriteLabel.setIcon(favoriteIcon);
@@ -597,8 +599,7 @@ public class MainFrame
                 buttonC.gridx = 1;
                 buttonC.gridy = 0;
                 buttonPanel.add(retweetLabel, buttonC);
-                
-                
+                                
                 bigPC.gridx = 0;
                 bigPC.gridy = 0;
                 tweetP.add(handleLabel, bigPC);
@@ -611,15 +612,12 @@ public class MainFrame
                 class retweetLabelListener implements MouseListener {
                     public void mouseClicked (MouseEvent e) {
                     }
-
                     public void mouseEntered (MouseEvent e) {
                         retweetLabel.setIcon(retweetHover);
                     }
-
                     public void mouseExited (MouseEvent e) {
                         retweetLabel.setIcon(retweet);
                     }
-
                     public void mousePressed (MouseEvent e) {
                         // retweet logic
                         try {
@@ -628,26 +626,21 @@ public class MainFrame
                         }
                         catch (TwitterException te) {}
                     }
-
                     public void mouseReleased (MouseEvent e) {
                     }
                 }
                 retweetLabel.addMouseListener(new retweetLabelListener());
-
-                
+               
                 class favoriteLabelListener implements MouseListener {
                     // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
                     public void mouseClicked (MouseEvent e) {
                     }
-
                     public void mouseEntered (MouseEvent e) {
                         favoriteLabel.setIcon(favoriteHover);
                     }
-
                     public void mouseExited (MouseEvent e) {
                         favoriteLabel.setIcon(favoritePic);
                     }
-
                     public void mousePressed (MouseEvent e) {
                         // favorite logic
                         try {
@@ -656,19 +649,20 @@ public class MainFrame
                         }
                         catch (TwitterException te) {}
                     }
-
                     public void mouseReleased (MouseEvent e) {
                     }
                 }
                 favoriteLabel.addMouseListener(new favoriteLabelListener());
+                
                 tweetP.add(buttonPanel, bigPC);
+                
                 completeGBC.gridx = 1;
                 completeGBC.gridy = 0;
                 completeTweetPanel.add(tweetP, completeGBC);
+                
                 tweetFr.add(completeTweetPanel);
                 tweetFr.setVisible(true);
             }
-
             public void mouseReleased (MouseEvent e) {
             }
         }
