@@ -561,7 +561,7 @@ public class MainFrame
                 tweetFr.setSize(800, 100);
                 JPanel tweetP = new JPanel(new GridBagLayout());
                 GridBagConstraints bigPC = new GridBagConstraints();
-                bigPC.anchor = GridBagConstraints.CENTER;
+                bigPC.anchor = GridBagConstraints.WEST;
                 bigPC.weightx = 1;
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 handleLabel.setFont(defaultUIFontBold);
