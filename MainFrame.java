@@ -293,24 +293,24 @@ public class MainFrame
     }
 
     private void addRightPanel () {
-        /*
-         * Plan for enhanced profile view:
-         * 1. Add 3-4 labels/images similar to tweets in addRightPanel
-         * 2. Make new displayTweet which runs off of the current display tweet action listener
-         * 3. Add listener to that new displayTweet, where when label is clicked new frame shows
-         * 4. Add listener to buttons in new frame for fav and rt
-         */
         rightPanel = new JPanel(new GridBagLayout()); // declare and initialize new rightPanel object reference
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.weightx = 1;
         gbc.insets = new Insets(10, 10, 10, 10);
+        
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
         profileViewNumTweetsLabel.setFont(defaultUIFont);
         profileViewNumFollowersLabel.setFont(defaultUIFont);
         profileViewNumFollowingLabel.setFont(defaultUIFont);
-
+        tweetTitleLabel.setFont(defaultUIFont);
+        profileTweet1.setFont(defaultUIFont);
+        profileTweet2.setFont(defaultUIFont);
+        profileTweet3.setFont(defaultUIFont);
+        profileTweet4.setFont(defaultUIFont);
+        
         // add profileView components to rightPanel
         gbc.gridx = 0; 
         gbc.gridy = 0;
