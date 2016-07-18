@@ -558,11 +558,22 @@ public class MainFrame
 
             public void mousePressed (MouseEvent e) {
                 JFrame tweetFr = new JFrame();
-                tweetFr.setSize(800, 100);
+                tweetFr.setSize(825, 100);
+                JPanel completeTweetPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints completeGBC = new GridBagConstraints();
+                completeGBC.anchor = GridBagConstraints.WEST;
+                completeGBC.weightx = 1;
+                completeGBC.insets = new Insets(0,0,0,0);
+                JLabel userIcon = new JLabel();
+                userIcon.setIcon(t.getUserIcon());
+                completeGBC.gridx = 0;
+                completeGBC.gridy = 0;
+                completeTweetPanel.add(userIcon, completeGBC);
                 JPanel tweetP = new JPanel(new GridBagLayout());
                 GridBagConstraints bigPC = new GridBagConstraints();
                 bigPC.anchor = GridBagConstraints.WEST;
                 bigPC.weightx = 1;
+                
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 handleLabel.setFont(defaultUIFontBold);
                 JLabel textLabel = new JLabel(t.getTweetText());
@@ -582,7 +593,8 @@ public class MainFrame
                 buttonC.gridx = 1;
                 buttonC.gridy = 0;
                 buttonPanel.add(retweetLabel, buttonC);
-
+                
+                
                 bigPC.gridx = 0;
                 bigPC.gridy = 0;
                 tweetP.add(handleLabel, bigPC);
@@ -646,7 +658,10 @@ public class MainFrame
                 }
                 favoriteLabel.addMouseListener(new favoriteLabelListener());
                 tweetP.add(buttonPanel, bigPC);
-                tweetFr.add(tweetP);
+                completeGBC.gridx = 1;
+                completeGBC.gridy = 0;
+                completeTweetPanel.add(tweetP, completeGBC);
+                tweetFr.add(completeTweetPanel);
                 tweetFr.setVisible(true);
             }
 
