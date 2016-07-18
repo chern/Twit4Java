@@ -86,12 +86,15 @@ public class MainFrame
     private JLabel profileViewNumTweetsLabel;
     private JLabel profileViewNumFollowersLabel;
     private JLabel profileViewNumFollowingLabel;
+    
     private JLabel profileTweet1;
     private JLabel profileTweet2;
     private JLabel profileTweet3;
     private JLabel profileTweet4;
-    private JPanel rightPanel;
     private JLabel tweetTitleLabel;
+    
+    private JPanel rightPanel;
+
     public MainFrame () {
         // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
@@ -339,8 +342,8 @@ public class MainFrame
         gbc.gridx = 0; 
         gbc.gridy = 9;
         rightPanel.add(profileTweet4, gbc);
+        
         rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
-
         overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
     }
 
@@ -577,6 +580,7 @@ public class MainFrame
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 handleLabel.setFont(defaultUIFontBold);
                 JLabel textLabel = new JLabel(t.getTweetText());
+                textLabel.setFont(defaultUIFont);
                 JPanel buttonPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints buttonC = new GridBagConstraints();
                 buttonC.anchor = GridBagConstraints.WEST;
