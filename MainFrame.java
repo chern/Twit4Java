@@ -298,7 +298,7 @@ public class MainFrame
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.weightx = 1;
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(12, 12, 12, 12);
         
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
