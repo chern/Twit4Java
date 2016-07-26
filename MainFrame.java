@@ -212,7 +212,6 @@ public class MainFrame
                 }
             }
         }
-
         tweetButton.addActionListener(new TweetButtonListener()); // add new instance of TweetButtonListener to the TweetButton
         leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
         overallPanel.add(leftPanel, BorderLayout.WEST); // add the leftPanel to the overall panel on the left (west) side
@@ -659,11 +658,13 @@ public class MainFrame
                 completeTweetPanel.add(tweetP, completeGBC);
                 
                 tweetFr.add(completeTweetPanel);
+                completeTweetPanel.setBorder(new TitledBorder(new EtchedBorder(), t.getUserHandle() + "'s tweet"));
                 tweetFr.setVisible(true);
             }
             public void mouseReleased (MouseEvent e) {
             }
         }
         tweetTextLabel.addMouseListener(new tweetTextListener());
+        
     }
 }
