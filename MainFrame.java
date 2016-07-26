@@ -94,9 +94,7 @@ public class MainFrame
     private JLabel tweetTitleLabel;
     
     private JPanel rightPanel;
-
     public MainFrame () {
-        // initialization of instance field variables
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
         favoriteHover = createImageIcon("heart_button_hover.png");
         retweet = createImageIcon("retweet_button_default.png");
@@ -154,7 +152,7 @@ public class MainFrame
     }
 
     public void displayInterface () {
-        fr.setSize(1250, 650); // invoke setSize mutator method on JFrame object referenced by fr
+        fr.setSize(1300, 650); // invoke setSize mutator method on JFrame object referenced by fr
         fr.setResizable(false); // do not allow resizing of window
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // automatically reset JVM upon closing
 
