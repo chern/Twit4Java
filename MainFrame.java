@@ -215,6 +215,15 @@ public class MainFrame
         tweetButton.addActionListener(new TweetButtonListener()); // add new instance of TweetButtonListener to the TweetButton
         leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
         overallPanel.add(leftPanel, BorderLayout.WEST); // add the leftPanel to the overall panel on the left (west) side
+        
+        
+        /*
+         * Bot Outline
+         * 1. Create UI (Similar to tweet functionality above)
+         * 2. Add a help button w/instructions
+         * 3. Create series of switches to check if a real instruction is given
+         * 4. Implement logic into each switch statement
+         */
     }
 
     private void addCenterPanel () {
