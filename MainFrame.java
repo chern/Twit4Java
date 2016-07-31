@@ -175,11 +175,14 @@ public class MainFrame
         // add New Tweet controls to leftPanel
         leftPanel.add(newTweetTextField);
         leftPanel.add(tweetButton);
-        for(int i = 0; i <7; i++) {
-            leftPanel.add(new JPanel());
-        }
         JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2)); // initialize panel for displaying information about the current user's account
         currentUserHandle.setFont(defaultUIFontBold);
+        
+        JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
+        JLabel botHeadingLabel = new JLabel("T4J Bot");
+        JLabel botHeadingHelpPanel = new JLabel();
+        
+        JTextField botText = new JTextField();
         // add current user info to currentUserAccountPanel
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
