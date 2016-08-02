@@ -180,9 +180,12 @@ public class MainFrame
         
         JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
         JLabel botHeadingLabel = new JLabel("T4J Bot");
-        JLabel botHeadingHelpPanel = new JLabel();
-        
+        JLabel botHeadingHelpPanel = new JLabel();        
         JTextField botText = new JTextField();
+        botHeadingPanel.add(botHeadingLabel);
+        botHeadingPanel.add(botHeadingHelpPanel);
+        leftPanel.add(botHeadingPanel);
+        leftPanel.add(botText);
         // add current user info to currentUserAccountPanel
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
