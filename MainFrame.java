@@ -167,6 +167,14 @@ public class MainFrame
     }
 
     private void addLeftPanel () {
+        
+        /*
+         * Commands for bot 
+         * DM + message + recipientHandle
+         * Follow + handle
+         * Favorite recent of + Handle
+         * Retween recent of + Handle
+         */
         JPanel leftPanel = new JPanel(new GridLayout(10, 1)); // declare and initialize new leftPanel object reference
 
         // set font for New Tweet controls
