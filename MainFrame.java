@@ -188,7 +188,9 @@ public class MainFrame
         
         JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
         JLabel botHeadingLabel = new JLabel("T4J Bot");
-        JLabel botHeadingHelpPanel = new JLabel();        
+        JLabel botHeadingHelpPanel = new JLabel();  
+        ImageIcon help = createImageIcon("help_button.png");
+        botHeadingHelpPanel.setIcon(help);
         JTextField botText = new JTextField();
         botHeadingPanel.add(botHeadingLabel);
         botHeadingPanel.add(botHeadingHelpPanel);
