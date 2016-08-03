@@ -443,6 +443,7 @@ public class MainFrame
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
 
+        
         class FavoriteListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
