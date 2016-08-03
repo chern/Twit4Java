@@ -188,12 +188,14 @@ public class MainFrame
         
         JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
         JLabel botHeadingLabel = new JLabel("T4J Bot");
+        botHeadingLabel.setFont(defaultUIFontBold);
         JLabel botHeadingHelpPanel = new JLabel();  
         ImageIcon help = createImageIcon("help_button.png");
         botHeadingHelpPanel.setIcon(help);
         JTextField botText = new JTextField();
         botHeadingPanel.add(botHeadingLabel);
         botHeadingPanel.add(botHeadingHelpPanel);
+        JButton botDoneButton = new JButton("Request");
         leftPanel.add(botHeadingPanel);
         leftPanel.add(botText);
         // add current user info to currentUserAccountPanel
@@ -229,6 +231,14 @@ public class MainFrame
             }
         }
         tweetButton.addActionListener(new TweetButtonListener()); // add new instance of TweetButtonListener to the TweetButton
+        
+        class HelpButtonListener implements ActionListener {
+            public void actionPerformed (ActionEvent e) {}
+        }
+        
+        class BotButtonListener implements ActionListener {
+            public void actionPerformed (ActionEvent e) {}
+        }
         leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
         overallPanel.add(leftPanel, BorderLayout.WEST); // add the leftPanel to the overall panel on the left (west) side
         
