@@ -86,13 +86,13 @@ public class MainFrame
     private JLabel profileViewNumTweetsLabel;
     private JLabel profileViewNumFollowersLabel;
     private JLabel profileViewNumFollowingLabel;
-    
+
     private JLabel profileTweet1;
     private JLabel profileTweet2;
     private JLabel profileTweet3;
     private JLabel profileTweet4;
     private JLabel tweetTitleLabel;
-    
+
     private JPanel rightPanel;
     public MainFrame () {
         favoritePic = createImageIcon("heart_button_default.png"); // invoke createImageIcon method (defined below) to assign ImageIcon object reference from the path
@@ -167,7 +167,7 @@ public class MainFrame
     }
 
     private void addLeftPanel () {
-        
+
         /*
          * Commands for bot 
          * DM + message + recipientHandle
@@ -185,6 +185,10 @@ public class MainFrame
         leftPanel.add(tweetButton);
         JPanel currentUserAccountPanel = new JPanel(new BorderLayout(2, 2)); // initialize panel for displaying information about the current user's account
         currentUserHandle.setFont(defaultUIFontBold);
+
+        for(int i = 0; i < 3; i++) {
+            leftPanel.add(new JPanel());
+        }
         
         JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
         JLabel botHeadingLabel = new JLabel("T4J Bot");
@@ -196,8 +200,10 @@ public class MainFrame
         botHeadingPanel.add(botHeadingLabel);
         botHeadingPanel.add(botHeadingHelpPanel);
         JButton botDoneButton = new JButton("Request");
+        botDoneButton.setFont(new Font("Arial", Font.BOLD, 16));
         leftPanel.add(botHeadingPanel);
         leftPanel.add(botText);
+
         // add current user info to currentUserAccountPanel
         currentUserAccountPanel.add(currentUserHandle, BorderLayout.EAST);
         currentUserAccountPanel.add(currentUserAccountImage, BorderLayout.WEST);
@@ -231,18 +237,30 @@ public class MainFrame
             }
         }
         tweetButton.addActionListener(new TweetButtonListener()); // add new instance of TweetButtonListener to the TweetButton
-        
-        class HelpButtonListener implements ActionListener {
-            public void actionPerformed (ActionEvent e) {}
+
+        class HelpButtonListener implements MouseListener {
+            public void mouseClicked (MouseEvent e) {
+            }
+            public void mouseEntered (MouseEvent e) {
+            }
+            public void mouseExited (MouseEvent e) {
+            }
+
+            public void mousePressed (MouseEvent e) {
+                
+            }
+
+            public void mouseReleased (MouseEvent e) {
+            }
         }
-        
+        botHeadingHelpPanel.addMouseListener(new HelpButtonListener());
         class BotButtonListener implements ActionListener {
             public void actionPerformed (ActionEvent e) {}
         }
+        botDoneButton.addActionListener(new BotButtonListener());
         leftPanel.setBorder(new TitledBorder(new EtchedBorder())); // set border of entire left panel, make it visible (etched)
         overallPanel.add(leftPanel, BorderLayout.WEST); // add the leftPanel to the overall panel on the left (west) side
-        
-        
+
         /*
          * Bot Outline
          * 1. Create UI (Similar to tweet functionality above)
@@ -326,12 +344,12 @@ public class MainFrame
 
     private void addRightPanel () {
         rightPanel = new JPanel(new GridBagLayout()); // declare and initialize new rightPanel object reference
-        
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.weightx = 1;
         gbc.insets = new Insets(12, 12, 12, 12);
-        
+
         // set font to default UI fonts
         profileViewUserHandle.setFont(defaultUIFontBold);
         profileViewNumTweetsLabel.setFont(defaultUIFont);
@@ -342,7 +360,7 @@ public class MainFrame
         profileTweet2.setFont(defaultUIFont);
         profileTweet3.setFont(defaultUIFont);
         profileTweet4.setFont(defaultUIFont);
-        
+
         // add profileView components to rightPanel
         gbc.gridx = 0; 
         gbc.gridy = 0;
@@ -374,7 +392,7 @@ public class MainFrame
         gbc.gridx = 0; 
         gbc.gridy = 9;
         rightPanel.add(profileTweet4, gbc);
-        
+
         rightPanel.setBorder(new TitledBorder(new EtchedBorder(), "Profile")); // set border of entire right panel, make it visible (etched)
         overallPanel.add(rightPanel, BorderLayout.EAST); // add rightPanel to overallPanel on the right (east) side
     }
@@ -455,7 +473,6 @@ public class MainFrame
         JLabel favoriteLabel = new JLabel();
         favoriteLabel.setIcon(favoritePic);
 
-        
         class FavoriteListener implements MouseListener {
             // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
             public void mouseClicked (MouseEvent e) {
@@ -585,41 +602,44 @@ public class MainFrame
         class tweetTextListener implements MouseListener {
             public void mouseClicked (MouseEvent e) {
             }
+
             public void mouseEntered (MouseEvent e) {
             }
+
             public void mouseExited (MouseEvent e) {
             }
+
             public void mousePressed (MouseEvent e) {
                 JFrame tweetFr = new JFrame();
                 tweetFr.setSize(825, 100);
-                
+
                 JPanel completeTweetPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints completeGBC = new GridBagConstraints();
                 completeGBC.anchor = GridBagConstraints.WEST;
                 completeGBC.weightx = 1;
                 completeGBC.insets = new Insets(0,0,0,0);
-                
+
                 JLabel userIcon = new JLabel();
                 userIcon.setIcon(t.getUserIcon());
                 completeGBC.gridx = 0;
                 completeGBC.gridy = 0;
                 completeTweetPanel.add(userIcon, completeGBC);
-                
+
                 JPanel tweetP = new JPanel(new GridBagLayout());
                 GridBagConstraints bigPC = new GridBagConstraints();
                 bigPC.anchor = GridBagConstraints.WEST;
                 bigPC.weightx = 1;
-                
+
                 JLabel handleLabel = new JLabel(t.getUserHandle());
                 handleLabel.setFont(defaultUIFontBold);
                 JLabel textLabel = new JLabel(t.getTweetText());
                 textLabel.setFont(defaultUIFont);
-                
+
                 JPanel buttonPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints buttonC = new GridBagConstraints();
                 buttonC.anchor = GridBagConstraints.WEST;
                 buttonC.weightx = 1;
-                
+
                 ImageIcon favoriteIcon = createImageIcon("heart_button_default.png");
                 JLabel favoriteLabel = new JLabel();
                 favoriteLabel.setIcon(favoriteIcon);
@@ -632,7 +652,7 @@ public class MainFrame
                 buttonC.gridx = 1;
                 buttonC.gridy = 0;
                 buttonPanel.add(retweetLabel, buttonC);
-                                
+
                 bigPC.gridx = 0;
                 bigPC.gridy = 0;
                 tweetP.add(handleLabel, bigPC);
@@ -645,12 +665,15 @@ public class MainFrame
                 class retweetLabelListener implements MouseListener {
                     public void mouseClicked (MouseEvent e) {
                     }
+
                     public void mouseEntered (MouseEvent e) {
                         retweetLabel.setIcon(retweetHover);
                     }
+
                     public void mouseExited (MouseEvent e) {
                         retweetLabel.setIcon(retweet);
                     }
+
                     public void mousePressed (MouseEvent e) {
                         // retweet logic
                         try {
@@ -659,21 +682,25 @@ public class MainFrame
                         }
                         catch (TwitterException te) {}
                     }
+
                     public void mouseReleased (MouseEvent e) {
                     }
                 }
                 retweetLabel.addMouseListener(new retweetLabelListener());
-               
+
                 class favoriteLabelListener implements MouseListener {
                     // implementations of mouseClicked, mouseEntered, mouseExited, mousePressed, mouseReleased methods defined in MouseListener interface
                     public void mouseClicked (MouseEvent e) {
                     }
+
                     public void mouseEntered (MouseEvent e) {
                         favoriteLabel.setIcon(favoriteHover);
                     }
+
                     public void mouseExited (MouseEvent e) {
                         favoriteLabel.setIcon(favoritePic);
                     }
+
                     public void mousePressed (MouseEvent e) {
                         // favorite logic
                         try {
@@ -682,25 +709,27 @@ public class MainFrame
                         }
                         catch (TwitterException te) {}
                     }
+
                     public void mouseReleased (MouseEvent e) {
                     }
                 }
                 favoriteLabel.addMouseListener(new favoriteLabelListener());
-                
+
                 tweetP.add(buttonPanel, bigPC);
-                
+
                 completeGBC.gridx = 1;
                 completeGBC.gridy = 0;
                 completeTweetPanel.add(tweetP, completeGBC);
-                
+
                 tweetFr.add(completeTweetPanel);
                 completeTweetPanel.setBorder(new TitledBorder(new EtchedBorder(), t.getUserHandle() + "'s tweet"));
                 tweetFr.setVisible(true);
             }
+
             public void mouseReleased (MouseEvent e) {
             }
         }
         tweetTextLabel.addMouseListener(new tweetTextListener());
-        
+
     }
 }
