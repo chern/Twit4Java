@@ -18,10 +18,9 @@ Twit4Java uses the [Twitter4J](http://twitter4j.org/en/index.html) library.
 Twit4Java is brought to you by [@wchern](https://github.com/wchern) and [@nishand17](https://github.com/nishand17).
 
 ### Future Roadmap
-The current version of Twit4Java is **1.1**, which includes features such as tweet alignment and hover effects.
+The current version of Twit4Java is **1.2**, which includes features such as UI and profile view enhancements.
 
 We have big plans for future releases. The current roadmap includes the following proposals:
-- 1.2: More UI updates (horizontal separator lines), Profile view enhancements
 - 2.0: Twitter Bot
 
 ###### GitHub Project Site: https://wchern.github.io/Twit4Java/
