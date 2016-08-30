@@ -191,7 +191,7 @@ public class MainFrame
         }
         
         JPanel botHeadingPanel = new JPanel(new GridLayout(1,2));
-        JLabel botHeadingLabel = new JLabel("T4J Bot");
+        JLabel botHeadingLabel = new JLabel("Twitter Bot");
         botHeadingLabel.setFont(defaultUIFontBold);
         JLabel botHeadingHelpPanel = new JLabel();  
         ImageIcon help = createImageIcon("help_button.png");
