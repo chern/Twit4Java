@@ -6,7 +6,7 @@
 Twit4Java is a basic Twitter client written in Java. We are making this for fun and as our final project in our Computer Programming class.
 
 ### Authors
-Twit4Java is brought to you by [@wchern](https://github.com/wchern) and [@nishand17](https://github.com/nishand17).
+Twit4Java is brought to you by [@Chern](https://github.com/Chern) and [@nishand17](https://github.com/nishand17).
 
 ### Running this project
 In order to run Twit4Java, you will need to do the following things—
@@ -24,4 +24,4 @@ The current version of Twit4Java is **1.2**, which includes features such as UI 
 We have big plans for future releases. The current roadmap includes the following proposals:
 - 2.0: Twitter Bot
 
-###### GitHub Project Site: https://wchern.github.io/Twit4Java/
+###### GitHub Project Site: https://chern.github.io/Twit4Java/
